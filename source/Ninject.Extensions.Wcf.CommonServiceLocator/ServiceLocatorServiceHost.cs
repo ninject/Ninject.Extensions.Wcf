@@ -40,6 +40,24 @@ namespace Ninject.Extensions.Wcf
         /// Initializes a new instance of the <see cref="ServiceLocatorServiceHost"/> class.
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
+        public ServiceLocatorServiceHost( TypeCode serviceType )
+            : base( serviceType )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServiceLocatorServiceHost"/> class.
+        /// </summary>
+        /// <param name="singletonInstance">The singleton instance.</param>
+        public ServiceLocatorServiceHost( object singletonInstance )
+            : base( singletonInstance )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServiceLocatorServiceHost"/> class.
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
         /// <param name="baseAddresses">The base addresses.</param>
         public ServiceLocatorServiceHost( Type serviceType, Uri[] baseAddresses )
             : base( serviceType, baseAddresses )

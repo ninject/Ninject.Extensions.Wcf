@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a0390cb4-93aa-4a52-82d3-bb9c6631f604" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:51423/TimeService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TimeService.wsdl" MetadataType="Wsdl" ID="a4dc7ba4-76ed-4b6d-828f-535c3ee16250" SourceId="1" SourceUrl="http://localhost:51423/TimeService.svc?wsdl" />
+    <MetadataFile FileName="TimeService.xsd" MetadataType="Schema" ID="1b5ecaca-e51b-4b1b-a4bb-526e410a8fe1" SourceId="1" SourceUrl="http://localhost:51423/TimeService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TimeService.disco" MetadataType="Disco" ID="c7558831-da08-4afd-b4e6-cb2cc9fc7df0" SourceId="1" SourceUrl="http://localhost:51423/TimeService.svc?disco" />
+    <MetadataFile FileName="TimeService1.xsd" MetadataType="Schema" ID="dffeefca-af7a-4997-943d-cbcf56058e89" SourceId="1" SourceUrl="http://localhost:51423/TimeService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
