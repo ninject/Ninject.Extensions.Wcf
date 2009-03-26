@@ -21,6 +21,9 @@
 #region Using Directives
 
 using System;
+using Ninject;
+using Ninject.Extensions.Wcf;
+using WcfTimeService;
 
 #endregion
 
@@ -33,6 +36,8 @@ namespace WindowsTimeService
         /// </summary>
         private static void Main()
         {
+            KernelContainer.Kernel = new StandardKernel( new ServiceModule() );
+
 #if SERVICE
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 

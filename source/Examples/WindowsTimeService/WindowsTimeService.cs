@@ -22,6 +22,7 @@
 
 using System.ServiceModel;
 using System.ServiceProcess;
+using Ninject;
 using Ninject.Extensions.Wcf;
 using WcfTimeService;
 
@@ -38,6 +39,10 @@ namespace WindowsTimeService
             InitializeComponent();
         }
 
+        /// <summary>
+        /// User for debugging to start the service manually.
+        /// </summary>
+        /// <param name="args">The args.</param>
         internal void Start( string[] args )
         {
             OnStart( args );
@@ -52,7 +57,7 @@ namespace WindowsTimeService
         /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart( string[] args )
         {
-            var service = new TimeService();
+            var service = KernelContainer.Kernel.Get<ITimeService>();
             _host = new NinjectServiceHost( service );
             _host.AddServiceEndpoint( typeof (ITimeService), new NetTcpBinding(), "net.tcp://localhost/TimeService" );
             _host.Open();
@@ -65,7 +70,11 @@ namespace WindowsTimeService
         /// </summary>
         protected override void OnStop()
         {
-            _host.Close();
+            if ( _host != null )
+            {
+                _host.Close();
+                _host = null;
+            }
         }
     }
 }

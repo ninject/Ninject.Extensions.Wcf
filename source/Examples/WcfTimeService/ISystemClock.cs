@@ -20,23 +20,14 @@
 
 #region Using Directives
 
-using Ninject.Modules;
-using WindowsTimeService;
+using System;
 
 #endregion
 
-namespace WcfTimeService
+namespace WindowsTimeService
 {
-    internal class ServiceModule : NinjectModule
+    public interface ISystemClock
     {
-        #region Overrides of NinjectModule
-
-        public override void Load()
-        {
-            Bind<ITimeService>().To<TimeService>().InSingletonScope();
-            Bind<ISystemClock>().To<SystemClock>().InSingletonScope();
-        }
-
-        #endregion
+        DateTime Now { get; }
     }
 }

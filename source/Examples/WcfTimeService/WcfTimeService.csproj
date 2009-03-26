@@ -68,7 +68,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ISystemClock.cs" />
     <Compile Include="ServiceModule.cs" />
+    <Compile Include="SystemClock.cs" />
     <Compile Include="TimeService.svc.cs">
       <DependentUpon>TimeService.svc</DependentUpon>
     </Compile>

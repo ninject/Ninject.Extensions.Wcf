@@ -69,6 +69,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\WcfTimeService\ServiceModule.cs">
+      <Link>ServiceModule.cs</Link>
+    </Compile>
     <Compile Include="WindowsTimeService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,9 +90,6 @@
       <Project>{1DC40C0B-580D-4BAD-A113-5E9D3FBDDBBD}</Project>
       <Name>WcfTimeService</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WindowsTimeService.resx">
