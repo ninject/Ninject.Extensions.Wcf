@@ -20,8 +20,6 @@
 
 #region Using Directives
 
-using System;
-using System.Web;
 using Ninject;
 using Ninject.Extensions.Wcf;
 
@@ -29,36 +27,21 @@ using Ninject.Extensions.Wcf;
 
 namespace WcfTimeService
 {
-    public class Global : HttpApplication
+    public class Global : NinjectWcfApplication
     {
-        protected void Application_Start( object sender, EventArgs e )
+        #region Overrides of NinjectWcfApplication
+
+        /// <summary>
+        /// Creates the kernel that will manage your application.
+        /// </summary>
+        /// <returns>The created kernel.</returns>
+        protected override IKernel CreateKernel()
         {
             IKernel kernel = new StandardKernel( new ServiceModule() );
             KernelContainer.Kernel = kernel;
+            return kernel;
         }
 
-        protected void Session_Start( object sender, EventArgs e )
-        {
-        }
-
-        protected void Application_BeginRequest( object sender, EventArgs e )
-        {
-        }
-
-        protected void Application_AuthenticateRequest( object sender, EventArgs e )
-        {
-        }
-
-        protected void Application_Error( object sender, EventArgs e )
-        {
-        }
-
-        protected void Session_End( object sender, EventArgs e )
-        {
-        }
-
-        protected void Application_End( object sender, EventArgs e )
-        {
-        }
+        #endregion
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -60,6 +61,7 @@
     <Compile Include="NinjectServiceBehavior.cs" />
     <Compile Include="NinjectServiceHost.cs" />
     <Compile Include="NinjectServiceHostFactory.cs" />
+    <Compile Include="NinjectWcfApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
