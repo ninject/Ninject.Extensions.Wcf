@@ -56,7 +56,7 @@ namespace Ninject.Extensions.Wcf
             lock ( this )
             {
                 _kernel = CreateKernel();
-                AssertServiceHostBinding();
+                RegisterCustomBehavior();
                 OnApplicationStarted();
             }
         }
@@ -136,7 +136,7 @@ namespace Ninject.Extensions.Wcf
         /// provide your own <c>ServiceHost</c> implementation, override this method
         /// and bind your implementation to the <c>ServiceHost</c> class.
         /// </summary>
-        protected virtual void AssertServiceHostBinding()
+        protected virtual void RegisterCustomBehavior()
         {
             if ( _kernel.GetBindings( typeof (ServiceHost) ).Count() == 0 )
             {
