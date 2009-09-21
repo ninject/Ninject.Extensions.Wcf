@@ -37,10 +37,9 @@ namespace TimeService.Client
 
         private static void Main()
         {
-            using ( TimeServiceClient client = GetTimeService( useSelfHosted ) )
-            {
-                Query( client );
-            }
+            TimeServiceClient client = GetTimeService( useSelfHosted );
+            Query( client );
+            client.Close();
         }
 
         private static TimeServiceClient GetTimeService( bool selfHosted )

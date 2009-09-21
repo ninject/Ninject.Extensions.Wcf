@@ -21,6 +21,8 @@
 #region Using Directives
 
 using System;
+using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using Ninject.Infrastructure;
 
@@ -54,6 +56,7 @@ namespace Ninject.Extensions.Wcf
             lock ( this )
             {
                 _kernel = CreateKernel();
+                AssertServiceHostBinding();
                 OnApplicationStarted();
             }
         }
@@ -127,6 +130,19 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <returns>The created kernel.</returns>
         protected abstract IKernel CreateKernel();
+
+        /// <summary>
+        /// Creates a kernel binding for a <c>ServiceHost</c>. If you wish to
+        /// provide your own <c>ServiceHost</c> implementation, override this method
+        /// and bind your implementation to the <c>ServiceHost</c> class.
+        /// </summary>
+        protected virtual void AssertServiceHostBinding()
+        {
+            if ( _kernel.GetBindings( typeof (ServiceHost) ).Count() == 0 )
+            {
+                _kernel.Bind<ServiceHost>().To<NinjectServiceHost>();
+            }
+        }
 
         /// <summary>
         /// Called when the application is started.

@@ -37,6 +37,11 @@ namespace WcfTimeService
     {
         private readonly ISystemClock _systemClock;
 
+        public TimeService()
+            : this( new SystemClock() )
+        {
+        }
+
         public TimeService( ISystemClock systemClock )
         {
             _systemClock = systemClock;

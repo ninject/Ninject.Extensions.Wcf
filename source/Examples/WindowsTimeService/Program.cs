@@ -39,12 +39,11 @@ namespace WindowsTimeService
             KernelContainer.Kernel = new StandardKernel( new ServiceModule() );
 
 #if SERVICE
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-			{ 
-				new WindowsTimeService() 
-			};
-            ServiceBase.Run(ServicesToRun);
+            var ServicesToRun = new System.ServiceProcess.ServiceBase[]
+                                {
+                                    new WindowsTimeService()
+                                };
+            System.ServiceProcess.ServiceBase.Run( ServicesToRun );
 #else
             var service = new WindowsTimeService();
             try

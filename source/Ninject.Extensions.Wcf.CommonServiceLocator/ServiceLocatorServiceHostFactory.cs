@@ -21,8 +21,10 @@
 #region Using Directives
 
 using System;
+using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
+using Microsoft.Practices.ServiceLocation;
 
 #endregion
 
@@ -47,7 +49,10 @@ namespace Ninject.Extensions.Wcf
         /// </returns>
         protected override ServiceHost CreateServiceHost( Type serviceType, Uri[] baseAddresses )
         {
-            return new ServiceLocatorServiceHost( serviceType, baseAddresses );
+            var serviceHostCreator =
+                ServiceLocator.Current.GetService( typeof (IServiceHostCreator) ) as IServiceHostCreator;
+            Debug.Assert( serviceHostCreator != null );
+            return serviceHostCreator.Create( serviceType, baseAddresses );
         }
     }
 }

@@ -23,6 +23,7 @@
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
+using Ninject.Parameters;
 
 #endregion
 
@@ -47,7 +48,9 @@ namespace Ninject.Extensions.Wcf
         /// </returns>
         protected override ServiceHost CreateServiceHost( Type serviceType, Uri[] baseAddresses )
         {
-            return new NinjectServiceHost( serviceType, baseAddresses );
+            var serviceTypeParameter = new ConstructorArgument( "serviceType", serviceType );
+            var baseAddressesParameter = new ConstructorArgument( "baseAddresses", baseAddresses );
+            return KernelContainer.Kernel.Get<ServiceHost>( serviceTypeParameter, baseAddressesParameter );
         }
     }
 }
