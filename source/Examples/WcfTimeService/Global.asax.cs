@@ -38,7 +38,6 @@ namespace WcfTimeService
         protected override IKernel CreateKernel()
         {
             IKernel kernel = new StandardKernel( new ServiceModule() );
-            KernelContainer.Kernel = kernel;
             return kernel;
         }
 
