@@ -56,6 +56,7 @@ namespace Ninject.Extensions.Wcf
             lock ( this )
             {
                 _kernel = CreateKernel();
+                KernelContainer.Kernel = _kernel;
                 RegisterCustomBehavior();
                 OnApplicationStarted();
             }
