@@ -1,7 +1,7 @@
 #region License
 
 //
-// Copyright © 2009 Ian Davis <ian.f.davis@gmail.com>
+// Copyright ï¿½ 2009 Ian Davis <ian.f.davis@gmail.com>
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
         /// <param name="baseAddresses">The base addresses.</param>
-        public NinjectServiceHost( Type serviceType, Uri[] baseAddresses )
+        public NinjectServiceHost( Type serviceType, params Uri[] baseAddresses )
             : base( serviceType, baseAddresses )
         {
         }
