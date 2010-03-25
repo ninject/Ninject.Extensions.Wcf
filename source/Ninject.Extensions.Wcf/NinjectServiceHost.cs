@@ -1,20 +1,12 @@
 #region License
 
-//
-// Copyright © 2009 Ian Davis <ian.f.davis@gmail.com>
 // 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
+// Author: Ian Davis <ian@innovatian.com>
+// Copyright (c) 2009-2010, Innovatian Software, LLC
+// 
+// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// See the file LICENSE.txt for details.
+// 
 
 #endregion
 
@@ -27,6 +19,9 @@ using System.ServiceModel;
 
 namespace Ninject.Extensions.Wcf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NinjectServiceHost : ServiceHost
     {
         /// <summary>
@@ -59,7 +54,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
         /// <param name="baseAddresses">The base addresses.</param>
-        public NinjectServiceHost( Type serviceType, Uri[] baseAddresses )
+        public NinjectServiceHost( Type serviceType, params Uri[] baseAddresses )
             : base( serviceType, baseAddresses )
         {
         }
