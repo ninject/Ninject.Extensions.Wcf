@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="Ninject" default="all">
+	<property name="version" value="2.1.0.0" overwrite="true"/>
+	<property name="product.name" value="Ninject.Extensions.Wcf" overwrite="false"/>
+	<property name="product.company" value="Innovatian Software, LLC" overwrite="false"/>
+	<property name="product.duration" value="2009-2010" overwrite="false"/>
+	<property name="product.description" value="WCF Extension for Ninject" overwrite="false"/>
+	<property name="product.platforms" value="net-3.5,net-4.0,mono-2.0"  overwrite="false"/>
+	<property name="product.buildserverPlatforms" value="net-3.5,net-4.0,mono-2.0"  overwrite="false"/>
+	<property name="dependencies" value="Ninject" overwrite="false"/>
+
+	<include buildfile="Ninject.include" />
+	<target name="all" depends="core csl"/>
+
+	<target name="core" depends="init">
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" output="${current.path.build}/${product.assembly}" doc="${current.path.build}/${product.docfile}" keyfile="${path.src}/${product.keyfile}">
+			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
+			<sources basedir="${path.src}">
+				<include name="${build.asminfo}"/>
+				<include name="${product.name}/**/*.cs"/>
+			</sources>
+			<references>
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.ServiceModel.dll"/>
+				<include name="System.ServiceModel.Activation.dll"/>
+				<include name="System.Web.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+			</references>
+		</csc>
+	</target>
+	
+    <target name="csl" depends="init core">
+		<property name="current.path.build.extensions" value="${path.build}/${build.platform}/${build.config}/extensions"/>
+		<mkdir dir="${current.path.build.extensions}" if="${not(directory::exists(current.path.build.extensions))}"/>
+
+        <csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" output="${current.path.build.extensions}/Ninject.Extensions.Wcf.CommonServiceLocator.dll">
+            <arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
+            <sources basedir="${path.src}">
+                <include name="${build.asminfo}"/>
+                <include name="Ninject.Extensions.Wcf.CommonServiceLocator/**/*.cs"/>
+            </sources>
+            <references basedir="${current.path.build}">
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.ServiceModel.dll"/>
+				<include name="System.ServiceModel.Activation.dll"/>
+				<include name="System.Web.dll"/>
+				<include name="System.Core.dll"/>
+                <include name="${path.lib}/CommonServiceLocator/Microsoft.Practices.ServiceLocation.dll"/>
+            </references>
+        </csc>
+    </target>	
+
+	<target name="compile-tests" depends="core" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
+		<mkdir dir="${current.path.test}"/>
+		<copy todir="${current.path.test}" flatten="true">
+			<fileset basedir="${current.path.build}">
+				<include name="**/*.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test}">
+			<fileset basedir="${path.tools.xunit}">
+				<include name="xunit.dll"/>
+                <include name="xunit.should.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test}">
+			<fileset basedir="${path.tools.moq}/net-3.5">
+				<include name="Moq.dll"/>
+			</fileset>
+		</copy>
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+         output="${current.path.test}/${product.assembly.test}">
+			<sources basedir="${path.src}">
+				<include name="${product.name}.Test/**/*.cs"/>
+			</sources>
+			<references basedir="${current.path.test}">
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.ServiceModel.dll"/>
+				<include name="System.Web.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="Moq.dll"/>
+				<include name="xunit.dll"/>
+                <include name="xunit.should.dll"/>
+				<include name="${product.assembly}"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+				<include name="${path.lib}/Ninject.Extensions.ContextPreservation/${build.platform}/Ninject.Extensions.ContextPreservation.dll"/>
+			</references>
+			<nowarn>
+				<warning number="1584"/>
+			</nowarn>
+		</csc>
+	</target>
+	
+    <target name="compile-silverlight-tests" depends="core" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
+        <mkdir dir="${current.path.test}"/>
+        <copy todir="${current.path.test}" flatten="true">
+            <fileset basedir="${current.path.build}">
+                <include name="**/*.dll"/>
+            </fileset>
+        </copy>
+        <copy todir="${current.path.test}">
+            <fileset basedir="${path.tools.moq}/silverlight">
+                <include name="Moq.Silverlight.dll"/>
+                <include name="Castle.DynamicProxy-Silverlight.dll"/>
+                <include name="Castle.Core-Silverlight.dll"/>
+            </fileset>
+        </copy>
+        <copy todir="${current.path.test}">
+            <fileset basedir="${path.tools.unitdriven}">
+                <include name="UnitDrivenLight.dll"/>
+            </fileset>
+        </copy>
+        <csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+         output="${current.path.test}/${product.assembly.silverlighttestdll}">
+            <sources basedir="${path.src}">
+                <include name="${product.name}.Test/**/*.cs"/>
+                <include name="${product.name}.SilverlightTests/*.cs"/>
+				<exclude name="${product.name}.Test/MSTestAttributes/*.cs"/>
+            </sources>
+            <references basedir="${current.path.test}">
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.ServiceModel.dll"/>
+				<include name="System.Web.dll"/>
+				<include name="System.Core.dll"/>
+                <include name="System.Windows.dll"/>
+                <include name="System.Windows.Browser.dll"/>
+                <include name="System.Net.dll"/>
+                <include name="Moq.Silverlight.dll"/>
+                <include name="Castle.DynamicProxy-Silverlight.dll"/>
+                <include name="Castle.Core-Silverlight.dll"/>
+                <include name="UnitDrivenLight.dll"/>
+				<include name="${product.assembly}"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+				<include name="${path.lib}/Ninject.Extensions.ContextPreservation/${build.platform}/Ninject.Extensions.ContextPreservation.dll"/>
+            </references>
+            <nowarn>
+                <warning number="1584"/>
+            </nowarn>
+        </csc>
+		<zip zipfile="${current.path.test}/${product.assembly.silverlighttest}">
+			<fileset basedir="${current.path.test}">
+				<include name="*.dll" />
+			</fileset>
+            <fileset basedir="${path.src}/${product.name}.SilverlightTests">
+                <include name="AppManifest.xaml"/>
+            </fileset>
+		</zip>
+    </target>	
+</project>

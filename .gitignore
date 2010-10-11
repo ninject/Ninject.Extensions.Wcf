@@ -1,7 +1,11 @@
 _ReSharper.*
 bin
+Bin
 obj
 dist
+build
 *.suo
 *resharper*
 *.user
+/lib/Ninject/*.zip
+/lib/Ninject/*/**
