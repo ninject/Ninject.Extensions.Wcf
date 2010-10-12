@@ -86,6 +86,7 @@ namespace Ninject.Extensions.Wcf
         /// </param>
         public void ReleaseInstance( InstanceContext instanceContext, object instance )
         {
+            KernelContainer.Kernel.Release(instance);
         }
 
         #endregion
