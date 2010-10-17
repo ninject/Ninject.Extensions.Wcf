@@ -135,6 +135,7 @@
 
 		<property name="current.path.ninject.lib" value="${path.lib}/Ninject/${build.platform}"/>
 		<property name="current.path.context.lib" value="${path.lib}/Ninject.Extensions.ContextPreservation/${build.platform}"/>
+		<property name="current.path.namedscope.lib" value="${path.lib}/Ninject.Extensions.NamedScope/${build.platform}"/>
 		<property name="current.path.build" value="${path.build}/${build.platform}/${build.config}"/>
 		<property name="current.path.build.lib" value="${path.build}/${build.platform}/${build.config}/lib"/>
 		<property name="current.path.test" value="${path.build}/${build.platform}/tests" />
@@ -162,6 +163,12 @@
 			</fileset>
 		</copy>
 		
+		<copy todir="${current.path.build.lib}">
+			<fileset basedir="${current.path.namedscope.lib}">
+				<include name="**/*.dll"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
 	</target>
 
 	<target name="config-build-debug">
