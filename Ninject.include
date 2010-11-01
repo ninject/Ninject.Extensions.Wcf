@@ -99,13 +99,16 @@
 		<echo message="Setting the [Is64BitProcess] property to ${Is64BitProcess}." />
 	</target>
 
-	<target name="rebuild" depends="clean, all"/>
+	<target name="rebuild" depends="clean, build"/>
 
 	<target name="clean">
 		<delete dir="${path.build}" if="${directory::exists(path.build)}"/>
 		<delete dir="${path.dist}" if="${directory::exists(path.dist)}"/>
 	</target>
 
+	<target name="build" depends="InitializeBuildSystem all"/>
+	<target name="InitializeBuildSystem" depends="DetectOperatingSystemArchitecture create-assembly-info"/>
+	
 	<target name="create-assembly-info" depends="get-git-revision">
 		<echo message="##teamcity[buildNumber '${build.version}']" />
 		<asminfo output="${path.build.assemblyinfo}" language="CSharp">
@@ -125,8 +128,7 @@
 		</asminfo>
 	</target>
 
-	<target name="init" depends="create-assembly-info">
-		<call target="DetectOperatingSystemArchitecture"/>
+	<target name="init">
 		<mkdir dir="${path.build}" if="${not(directory::exists(path.build))}"/>
 		<mkdir dir="${path.dist}" if="${not(directory::exists(path.dist))}"/>
 
@@ -240,7 +242,7 @@
 		<property name="build.defines" value="${global.build.defines},NET,NET_35,NO_WEB,MONO"/>
 	</target>
 	
-	<target name="test" depends="compile-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5' or build.platform == 'mono-2.0' or build.platform == 'mono-2.0-no-web')}">
+	<target name="test" depends="compile-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
 		<exec program="${path.tools.xunit.console}" workingdir="${current.path.test}" commandline="${product.assembly.test} /html ${current.path.test}/results.html" failonerror="true"/>
 		<if test="${not Is64BitOperatingSystem}">
 			<exec verbose="true" program="${path.tools.ncover}/ncover.console.exe" workingdir="${current.path.test}"
@@ -273,7 +275,7 @@
 	
 	<target name="package-all" depends="all package-bin package-source" />
 	
-	<target name="buildServerPlatforms">
+	<target name="buildServerPlatforms" depends="InitializeBuildSystem">
 		<foreach item="String" in="${product.buildserverPlatforms}" delim="," property="platform">
 			<property name="build.platform" value="${platform}"/>
 			<call target="package-bin"/>
@@ -281,7 +283,7 @@
 		<call target="package-source"/>
 	</target>
 
-	<target name="allPlatforms">
+	<target name="allPlatforms" depends="InitializeBuildSystem">
 		<foreach item="String" in="${product.platforms}" delim="," property="platform">
 			<property name="build.platform" value="${platform}"/>
 			<call target="package-bin"/>

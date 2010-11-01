@@ -25,7 +25,7 @@ namespace TimeService.Client
     {
         private const int QUERIES = 5;
         private const int SLEEP = 1 * 1000;
-        private static bool useSelfHosted = true;
+        private static bool useSelfHosted = false;
 
         private static void Main()
         {
