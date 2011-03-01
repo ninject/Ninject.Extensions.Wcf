@@ -45,7 +45,7 @@ namespace Ninject.Extensions.Wcf
         /// Handles the Start event of the Application.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The System.EventArgs instance containing the event data.</param>
         protected virtual void Application_Start( object sender, EventArgs e )
         {
             lock ( this )
@@ -61,7 +61,7 @@ namespace Ninject.Extensions.Wcf
         /// Handles the Start event of the Session.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The System.EventArgs instance containing the event data.</param>
         protected virtual void Session_Start( object sender, EventArgs e )
         {
         }
@@ -70,7 +70,7 @@ namespace Ninject.Extensions.Wcf
         /// Handles the BeginRequest event of the Application.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The System.EventArgs instance containing the event data.</param>
         protected virtual void Application_BeginRequest( object sender, EventArgs e )
         {
         }
@@ -79,7 +79,7 @@ namespace Ninject.Extensions.Wcf
         /// Handles the AuthenticateRequest event of the Application.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The System.EventArgs instance containing the event data.</param>
         protected virtual void Application_AuthenticateRequest( object sender, EventArgs e )
         {
         }
@@ -88,7 +88,7 @@ namespace Ninject.Extensions.Wcf
         /// Handles the Error event of the Application.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The System.EventArgs instance containing the event data.</param>
         protected virtual void Application_Error( object sender, EventArgs e )
         {
         }
@@ -97,7 +97,7 @@ namespace Ninject.Extensions.Wcf
         /// Handles the End event of the Session.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The System.EventArgs instance containing the event data.</param>
         protected virtual void Session_End( object sender, EventArgs e )
         {
         }
@@ -106,7 +106,7 @@ namespace Ninject.Extensions.Wcf
         /// Handles the End event of the Application.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The System.EventArgs instance containing the event data.</param>
         protected virtual void Application_End( object sender, EventArgs e )
         {
             lock ( this )
