@@ -24,20 +24,22 @@ namespace WindowsTimeService
 {
     public partial class WindowsTimeService : ServiceBase
     {
-        private NinjectServiceHost _host;
+        private readonly ServiceHost timeServiceHost;
 
-        public WindowsTimeService()
+        public WindowsTimeService(ServiceHost timeServiceHost)
         {
             InitializeComponent();
+
+            this.timeServiceHost = timeServiceHost;
         }
 
         /// <summary>
         /// User for debugging to start the service manually.
         /// </summary>
-        /// <param name="args">The args.</param>
-        internal void Start( string[] args )
+        /// <param name="args">The arguments.</param>
+        internal void Start(string[] args)
         {
-            OnStart( args );
+            this.OnStart(args);
         }
 
         /// <summary>
@@ -47,12 +49,12 @@ namespace WindowsTimeService
         /// automatically). Specifies actions to take when the service starts.
         /// </summary>
         /// <param name="args">Data passed by the start command.</param>
-        protected override void OnStart( string[] args )
+        protected override void OnStart(string[] args)
         {
-            var service = KernelContainer.Kernel.Get<ITimeService>();
-            _host = new NinjectServiceHost( service );
-            _host.AddServiceEndpoint( typeof (ITimeService), new NetTcpBinding(), "net.tcp://localhost/TimeService" );
-            _host.Open();
+            this.timeServiceHost.AddServiceEndpoint(
+                typeof(ITimeService), new NetTcpBinding(), "net.tcp://localhost/TimeService");
+
+            this.timeServiceHost.Open();
         }
 
         /// <summary>
@@ -62,10 +64,9 @@ namespace WindowsTimeService
         /// </summary>
         protected override void OnStop()
         {
-            if ( _host != null )
+            if (this.timeServiceHost != null)
             {
-                _host.Close();
-                _host = null;
+                this.timeServiceHost.Close();
             }
         }
     }

@@ -51,7 +51,6 @@ namespace Ninject.Extensions.Wcf
             lock ( this )
             {
                 _kernel = CreateKernel();
-                KernelContainer.Kernel = _kernel;
                 RegisterCustomBehavior();
                 OnApplicationStarted();
             }
@@ -134,7 +133,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         protected virtual void RegisterCustomBehavior()
         {
-            if ( _kernel.GetBindings( typeof (ServiceHost) ).Count() == 0 )
+            if (_kernel.GetBindings(typeof(ServiceHost)).Count() == 0)
             {
                 _kernel.Bind<ServiceHost>().To<NinjectServiceHost>();
             }

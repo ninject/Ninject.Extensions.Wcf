@@ -23,11 +23,24 @@ using System.ServiceModel.Dispatcher;
 
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+
     /// <summary>
     /// Service behavior implementation for Ninject.
     /// </summary>
     public class NinjectServiceBehavior : IServiceBehavior
     {
+        private readonly Func<Type, IInstanceProvider> instanceProviderFactory;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NinjectServiceBehavior"/> class.
+        /// </summary>
+        /// <param name="instanceProviderFactory">The instance provider factory.</param>
+        public NinjectServiceBehavior(Func<Type, IInstanceProvider> instanceProviderFactory)
+        {
+            this.instanceProviderFactory = instanceProviderFactory;
+        }
+
         #region Implementation of IServiceBehavior
 
         /// <summary>
@@ -40,7 +53,7 @@ namespace Ninject.Extensions.Wcf
         /// <param name="serviceHostBase">
         /// The service host that is currently being constructed.
         /// </param>
-        public void Validate( ServiceDescription serviceDescription, ServiceHostBase serviceHostBase )
+        public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
         }
 
@@ -60,9 +73,11 @@ namespace Ninject.Extensions.Wcf
         /// <param name="bindingParameters">
         /// Custom objects to which binding elements have access.
         /// </param>
-        public void AddBindingParameters( ServiceDescription serviceDescription, ServiceHostBase serviceHostBase,
-                                          Collection<ServiceEndpoint> endpoints,
-                                          BindingParameterCollection bindingParameters )
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters)
         {
         }
 
@@ -78,15 +93,15 @@ namespace Ninject.Extensions.Wcf
         /// <param name="serviceHostBase">
         /// The host that is currently being built.
         /// </param>
-        public void ApplyDispatchBehavior( ServiceDescription serviceDescription, ServiceHostBase serviceHostBase )
+        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
             var endpointDispatchers =
                 serviceHostBase.ChannelDispatchers.OfType<ChannelDispatcher>()
-                .SelectMany( channelDispatcher => channelDispatcher.Endpoints );
-            foreach ( EndpointDispatcher endpointDispatcher in endpointDispatchers)
+                    .SelectMany(channelDispatcher => channelDispatcher.Endpoints);
+            foreach (EndpointDispatcher endpointDispatcher in endpointDispatchers)
             {
                 endpointDispatcher.DispatchRuntime.InstanceProvider =
-                    new NinjectInstanceProvider( serviceDescription.ServiceType );
+                    this.instanceProviderFactory(serviceDescription.ServiceType);
             }
         }
 

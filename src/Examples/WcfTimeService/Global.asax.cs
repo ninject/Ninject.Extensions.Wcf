@@ -33,6 +33,13 @@ namespace WcfTimeService
             return kernel;
         }
 
+        protected override void RegisterCustomBehavior()
+        {
+            base.RegisterCustomBehavior();
+
+            TimeServiceHostFactory.SetResolutionRoot(Kernel);
+        }
+
         #endregion
     }
 }

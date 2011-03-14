@@ -19,12 +19,16 @@ using WindowsTimeService;
 
 namespace WcfTimeService
 {
+    using Ninject.Syntax;
+
     internal class ServiceModule : NinjectModule
     {
         #region Overrides of NinjectModule
 
         public override void Load()
         {
+            this.Bind<IResolutionRoot>().ToConstant(this.Kernel);
+
             Bind<ITimeService>().To<TimeService>().InSingletonScope();
             Bind<ISystemClock>().To<SystemClock>().InSingletonScope();
         }

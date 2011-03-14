@@ -19,44 +19,56 @@ using System.ServiceModel;
 
 namespace Ninject.Extensions.Wcf
 {
+    using System.ServiceModel.Description;
+
     /// <summary>
     /// 
     /// </summary>
     public class NinjectServiceHost : ServiceHost
     {
+        private readonly Func<IServiceBehavior> behaviorFactory;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
         /// </summary>
-        public NinjectServiceHost()
+        /// <param name="behaviorFactory">The behavior factory.</param>
+        public NinjectServiceHost(Func<IServiceBehavior> behaviorFactory)
         {
+            this.behaviorFactory = behaviorFactory;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
         /// </summary>
+        /// <param name="behaviorFactory">The behavior factory.</param>
         /// <param name="serviceType">Type of the service.</param>
-        public NinjectServiceHost( TypeCode serviceType )
-            : base( serviceType )
+        public NinjectServiceHost(Func<IServiceBehavior> behaviorFactory, TypeCode serviceType)
+            : base(serviceType)
         {
+            this.behaviorFactory = behaviorFactory;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
         /// </summary>
+        /// <param name="behaviorFactory">The behavior factory.</param>
         /// <param name="singletonInstance">The singleton instance.</param>
-        public NinjectServiceHost( object singletonInstance )
-            : base( singletonInstance )
+        public NinjectServiceHost(Func<IServiceBehavior> behaviorFactory, object singletonInstance)
+            : base(singletonInstance)
         {
+            this.behaviorFactory = behaviorFactory;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
         /// </summary>
+        /// <param name="behaviorFactory">The behavior factory.</param>
         /// <param name="serviceType">Type of the service.</param>
         /// <param name="baseAddresses">The base addresses.</param>
-        public NinjectServiceHost( Type serviceType, params Uri[] baseAddresses )
-            : base( serviceType, baseAddresses )
+        public NinjectServiceHost(Func<IServiceBehavior> behaviorFactory, Type serviceType, params Uri[] baseAddresses)
+            : base(serviceType, baseAddresses)
         {
+            this.behaviorFactory = behaviorFactory;
         }
 
         /// <summary>
@@ -64,7 +76,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         protected override void OnOpening()
         {
-            Description.Behaviors.Add( new NinjectServiceBehavior() );
+            Description.Behaviors.Add(this.behaviorFactory());
             base.OnOpening();
         }
     }

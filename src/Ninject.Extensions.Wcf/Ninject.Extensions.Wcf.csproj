@@ -58,8 +58,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -79,13 +78,13 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="KernelContainer.cs" />
     <Compile Include="NinjectInstanceProvider.cs" />
     <Compile Include="NinjectServiceBehavior.cs" />
     <Compile Include="NinjectServiceHost.cs" />
     <Compile Include="NinjectServiceHostFactory.cs" />
     <Compile Include="NinjectWcfApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WcfModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

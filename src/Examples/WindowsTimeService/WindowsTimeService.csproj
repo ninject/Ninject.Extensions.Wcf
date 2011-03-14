@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WindowsTimeServiceModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj">

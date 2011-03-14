@@ -10,17 +10,14 @@
 
 #endregion
 
-#region Using Directives
-
-using System;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Dispatcher;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
+    using Syntax;
+
     /// <summary>
     /// 
     /// </summary>
@@ -28,13 +25,17 @@ namespace Ninject.Extensions.Wcf
     {
         private readonly Type _serviceType;
 
+        private readonly IResolutionRoot resolutionRoot;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NinjectInstanceProvider"/> class.
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
-        public NinjectInstanceProvider( Type serviceType )
+        /// <param name="resolutionRoot">The resolution root.</param>
+        public NinjectInstanceProvider( Type serviceType, IResolutionRoot resolutionRoot )
         {
             _serviceType = serviceType;
+            this.resolutionRoot = resolutionRoot;
         }
 
         #region Implementation of IInstanceProvider
@@ -52,7 +53,7 @@ namespace Ninject.Extensions.Wcf
         /// </param>
         public object GetInstance( InstanceContext instanceContext )
         {
-            return GetInstance( instanceContext, null );
+            return this.GetInstance( instanceContext, null );
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace Ninject.Extensions.Wcf
         /// </param>
         public object GetInstance( InstanceContext instanceContext, Message message )
         {
-            return KernelContainer.Kernel.Get( _serviceType );
+            return this.resolutionRoot.Get( _serviceType );
         }
 
         /// <summary>

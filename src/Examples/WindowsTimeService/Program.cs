@@ -28,23 +28,24 @@ namespace WindowsTimeService
         /// </summary>
         private static void Main()
         {
-            KernelContainer.Kernel = new StandardKernel( new ServiceModule() );
+            var kernel = new StandardKernel(new ServiceModule(), new WindowsTimeServiceModule());           
 
 #if SERVICE
             var ServicesToRun = new System.ServiceProcess.ServiceBase[]
                                 {
-                                    new WindowsTimeService()
+                                    kernel.Get<WindowsTimeService>()
                                 };
             System.ServiceProcess.ServiceBase.Run( ServicesToRun );
 #else
-            var service = new WindowsTimeService();
+            var service = kernel.Get<WindowsTimeService>();
             try
             {
-                service.Start( new string[] {} );
+                service.Start(new string[] { });
 
                 do
                 {
-                } while ( Console.ReadLine() != "q" );
+                } 
+                while (Console.ReadLine() != "q");
             }
             finally
             {
