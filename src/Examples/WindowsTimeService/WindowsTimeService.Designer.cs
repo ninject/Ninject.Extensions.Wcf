@@ -1,6 +1,17 @@
-﻿namespace WindowsTimeService
+﻿// 
+// Author: Ian Davis <ian@innovatian.com>
+// Copyright (c) 2009-2010, Innovatian Software, LLC
+// 
+// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// See the file LICENSE.txt for details.
+// 
+
+namespace WindowsTimeService
 {
-    partial class WindowsTimeService
+    /// <summary>
+    /// The service as self hosting.
+    /// </summary>
+    public partial class WindowsTimeService
     {
         /// <summary> 
         /// Required designer variable.
@@ -13,10 +24,11 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

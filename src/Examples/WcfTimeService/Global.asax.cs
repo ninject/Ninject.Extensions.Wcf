@@ -1,6 +1,4 @@
-﻿#region License
-
-// 
+﻿// 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
 // 
@@ -8,13 +6,14 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
 namespace WcfTimeService
 {
     using Ninject;
     using Ninject.Extensions.Wcf;
 
+    /// <summary>
+    /// The wcf application.
+    /// </summary>
     public class Global : NinjectWcfApplication
     {
         /// <summary>

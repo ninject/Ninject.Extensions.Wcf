@@ -19,7 +19,6 @@
 
 namespace WindowsTimeService
 {
-    using System;
     using System.ServiceModel;
     using Ninject;
     using Ninject.Extensions.Wcf;
@@ -27,6 +26,9 @@ namespace WindowsTimeService
     using Ninject.Parameters;
     using WcfTimeService;
 
+    /// <summary>
+    /// The module of the service.
+    /// </summary>
     public class WindowsTimeServiceModule : NinjectModule
     {
         /// <summary>

@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,17 +6,11 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-using System.ServiceModel;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+    using System.ServiceModel;
+
     /// <summary>
     /// Service locaotr service host
     /// </summary>
@@ -35,8 +27,8 @@ namespace Ninject.Extensions.Wcf
         /// Initializes a new instance of the <see cref="ServiceLocatorServiceHost"/> class.
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
-        public ServiceLocatorServiceHost( TypeCode serviceType )
-            : base( serviceType )
+        public ServiceLocatorServiceHost(TypeCode serviceType)
+            : base(serviceType)
         {
         }
 
@@ -44,8 +36,8 @@ namespace Ninject.Extensions.Wcf
         /// Initializes a new instance of the <see cref="ServiceLocatorServiceHost"/> class.
         /// </summary>
         /// <param name="singletonInstance">The singleton instance.</param>
-        public ServiceLocatorServiceHost( object singletonInstance )
-            : base( singletonInstance )
+        public ServiceLocatorServiceHost(object singletonInstance)
+            : base(singletonInstance)
         {
         }
 
@@ -54,8 +46,8 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
         /// <param name="baseAddresses">The base addresses.</param>
-        public ServiceLocatorServiceHost( Type serviceType, params Uri[] baseAddresses )
-            : base( serviceType, baseAddresses )
+        public ServiceLocatorServiceHost(Type serviceType, params Uri[] baseAddresses)
+            : base(serviceType, baseAddresses)
         {
         }
 
@@ -64,7 +56,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         protected override void OnOpening()
         {
-            Description.Behaviors.Add( new ServiceLocatorServiceBehavior() );
+            Description.Behaviors.Add(new ServiceLocatorServiceBehavior());
             base.OnOpening();
         }
     }

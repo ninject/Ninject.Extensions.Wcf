@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,18 +6,19 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-
-#endregion
-
-namespace WindowsTimeService
+namespace WcfTimeService
 {
+    using System;
+
+    /// <summary>
+    /// Provider for the current time
+    /// </summary>
     public interface ISystemClock
     {
+        /// <summary>
+        /// Gets the current time.
+        /// </summary>
+        /// <value>The current time.</value>
         DateTime Now { get; }
     }
 }

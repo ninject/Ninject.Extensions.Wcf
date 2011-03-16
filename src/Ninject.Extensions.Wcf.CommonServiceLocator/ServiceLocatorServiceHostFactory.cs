@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,20 +6,13 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using Microsoft.Practices.ServiceLocation;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using Microsoft.Practices.ServiceLocation;
+
     /// <summary>
     /// Service host factory using Service locator
     /// </summary>
@@ -42,12 +33,10 @@ namespace Ninject.Extensions.Wcf
         /// A <see cref="T:System.ServiceModel.ServiceHost"/> for the type of
         /// service specified with a specific base address.
         /// </returns>
-        protected override ServiceHost CreateServiceHost( Type serviceType, Uri[] baseAddresses )
+        protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            var serviceHostCreator =
-                ServiceLocator.Current.GetService( typeof (IServiceHostCreator) ) as IServiceHostCreator;
-            Debug.Assert( serviceHostCreator != null );
-            return serviceHostCreator.Create( serviceType, baseAddresses );
+            var serviceHostCreator = (IServiceHostCreator)ServiceLocator.Current.GetService(typeof(IServiceHostCreator));
+            return serviceHostCreator.Create(serviceType, baseAddresses);
         }
     }
 }

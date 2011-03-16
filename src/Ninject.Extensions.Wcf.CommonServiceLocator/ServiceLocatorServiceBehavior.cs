@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,21 +6,15 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+
     /// <summary>
     /// Service Behavior
     /// </summary>
@@ -40,7 +32,7 @@ namespace Ninject.Extensions.Wcf
         /// <param name="serviceHostBase">
         /// The service host that is currently being constructed.
         /// </param>
-        public void Validate( ServiceDescription serviceDescription, ServiceHostBase serviceHostBase )
+        public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
         }
 
@@ -60,9 +52,11 @@ namespace Ninject.Extensions.Wcf
         /// <param name="bindingParameters">
         /// Custom objects to which binding elements have access.
         /// </param>
-        public void AddBindingParameters( ServiceDescription serviceDescription, ServiceHostBase serviceHostBase,
-                                          Collection<ServiceEndpoint> endpoints,
-                                          BindingParameterCollection bindingParameters )
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters)
         {
         }
 
@@ -78,13 +72,12 @@ namespace Ninject.Extensions.Wcf
         /// <param name="serviceHostBase">
         /// The host that is currently being built.
         /// </param>
-        public void ApplyDispatchBehavior( ServiceDescription serviceDescription, ServiceHostBase serviceHostBase )
+        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
-            foreach ( EndpointDispatcher endpointDispatcher in
-                serviceHostBase.ChannelDispatchers.OfType<ChannelDispatcher>().SelectMany( channelDispatcher => channelDispatcher.Endpoints ) )
+            foreach (EndpointDispatcher endpointDispatcher in
+                serviceHostBase.ChannelDispatchers.OfType<ChannelDispatcher>().SelectMany(channelDispatcher => channelDispatcher.Endpoints))
             {
-                endpointDispatcher.DispatchRuntime.InstanceProvider =
-                    new ServiceLocatorInstanceProvider( serviceDescription.ServiceType );
+                endpointDispatcher.DispatchRuntime.InstanceProvider = new ServiceLocatorInstanceProvider(serviceDescription.ServiceType);
             }
         }
 

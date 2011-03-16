@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,19 +6,13 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-using System.ServiceModel;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+    using System.ServiceModel;
+
     /// <summary>
-    /// 
+    /// Creates ServiceLocatorServiceHost upon request.
     /// </summary>
     public class ServiceHostCreator : IServiceHostCreator
     {
@@ -28,10 +20,8 @@ namespace Ninject.Extensions.Wcf
         /// Creator function that users can override to change the default functionality and 
         /// provide alternate <c>ServiceHost</c> implementations.
         /// </summary>
-        public static Func<Type, Uri[], ServiceHost> Creator =
-            ( serviceType, baseAddresses ) => new ServiceLocatorServiceHost( serviceType, baseAddresses );
-
-        #region Implementation of IServiceHostCreator
+        private static readonly Func<Type, Uri[], ServiceHost> creator = 
+            (serviceType, baseAddresses) => new ServiceLocatorServiceHost(serviceType, baseAddresses);
 
         /// <summary>
         /// Creates a <c>ServiceHost</c> with the specified configuration.
@@ -39,11 +29,9 @@ namespace Ninject.Extensions.Wcf
         /// <param name="serviceType">Type of the service.</param>
         /// <param name="baseAddresses">The base addresses.</param>
         /// <returns>A new or existing service host reference for the specified type of service.</returns>
-        public ServiceHost Create( Type serviceType, Uri[] baseAddresses )
+        public ServiceHost Create(Type serviceType, Uri[] baseAddresses)
         {
-            return Creator( serviceType, baseAddresses );
+            return creator(serviceType, baseAddresses);
         }
-
-        #endregion
     }
 }

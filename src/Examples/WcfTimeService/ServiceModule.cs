@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,23 +6,19 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using Ninject.Modules;
-using WindowsTimeService;
-
-#endregion
-
 namespace WcfTimeService
 {
+    using Ninject.Modules;
     using Ninject.Syntax;
 
+    /// <summary>
+    /// The module declaring the bindings of the service.
+    /// </summary>
     internal class ServiceModule : NinjectModule
     {
-        #region Overrides of NinjectModule
-
+        /// <summary>
+        /// Loads the module into the kernel.
+        /// </summary>
         public override void Load()
         {
             this.Bind<IResolutionRoot>().ToConstant(this.Kernel);
@@ -32,7 +26,5 @@ namespace WcfTimeService
             Bind<ITimeService>().To<TimeService>().InSingletonScope();
             Bind<ISystemClock>().To<SystemClock>().InSingletonScope();
         }
-
-        #endregion
     }
 }

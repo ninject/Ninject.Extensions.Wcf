@@ -1,6 +1,4 @@
-﻿#region License
-
-// 
+﻿// 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
 // 
@@ -8,19 +6,15 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-using Ninject;
-using Ninject.Extensions.Wcf;
-using WcfTimeService;
-
-#endregion
-
 namespace WindowsTimeService
 {
+    using System;
+    using Ninject;
+    using WcfTimeService;
+
+    /// <summary>
+    /// The application main.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

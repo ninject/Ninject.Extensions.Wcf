@@ -1,6 +1,4 @@
-﻿#region License
-
-// 
+﻿// 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
 // 
@@ -8,44 +6,48 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-using System.ServiceModel;
-using WindowsTimeService;
-
-#endregion
-
 namespace WcfTimeService
 {
+    using System;
+
     /// <summary>
     /// When self-hosting and injecting the service instance, the InstanceContextMode must be set to Single.
     /// If you are using the IIS hosting, you must remove this attribute.
     /// </summary>
-    //[ServiceBehavior( InstanceContextMode = InstanceContextMode.Single )]
+    //// [ServiceBehavior( InstanceContextMode = InstanceContextMode.Single )]
     public class TimeService : ITimeService
     {
-        private readonly ISystemClock _systemClock;
+        /// <summary>
+        /// The system clock to get the current time.
+        /// </summary>
+        private readonly ISystemClock systemClock;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimeService"/> class.
+        /// </summary>
         public TimeService()
-            : this( new SystemClock() )
+            : this(new SystemClock())
         {
         }
 
-        public TimeService( ISystemClock systemClock )
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimeService"/> class.
+        /// </summary>
+        /// <param name="systemClock">
+        /// The system clock.
+        /// </param>
+        public TimeService(ISystemClock systemClock)
         {
-            _systemClock = systemClock;
+            this.systemClock = systemClock;
         }
 
-        #region Implementation of ITimeService
-
+        /// <summary>
+        /// Returns the current time
+        /// </summary>
+        /// <returns>The current time.</returns>
         public DateTime WhatTimeIsIt()
         {
-            return _systemClock.Now;
+            return this.systemClock.Now;
         }
-
-        #endregion
     }
 }
