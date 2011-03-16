@@ -10,26 +10,17 @@
 
 #endregion
 
-#region Using Directives
-
-using System;
-using System.Linq;
-using System.ServiceModel;
-using System.Web;
-using Ninject.Infrastructure;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    using System;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.Web;
+    using Ninject.Infrastructure;
+
     public abstract class NinjectWcfApplication : HttpApplication, IHaveKernel
     {
         private static IKernel _kernel;
-
-        #region IHaveKernel Members
 
         /// <summary>
         /// Gets the kernel.
@@ -38,8 +29,6 @@ namespace Ninject.Extensions.Wcf
         {
             get { return _kernel; }
         }
-
-        #endregion
 
         /// <summary>
         /// Handles the Start event of the Application.
@@ -51,6 +40,7 @@ namespace Ninject.Extensions.Wcf
             lock ( this )
             {
                 _kernel = CreateKernel();
+                NinjectServiceHostFactory.SetKernel(_kernel);
                 RegisterCustomBehavior();
                 OnApplicationStarted();
             }

@@ -10,36 +10,20 @@
 
 #endregion
 
-#region Using Directives
-
-using Ninject;
-using Ninject.Extensions.Wcf;
-
-#endregion
-
 namespace WcfTimeService
 {
+    using Ninject;
+    using Ninject.Extensions.Wcf;
+
     public class Global : NinjectWcfApplication
     {
-        #region Overrides of NinjectWcfApplication
-
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
         protected override IKernel CreateKernel()
         {
-            IKernel kernel = new StandardKernel( new ServiceModule() );
-            return kernel;
+            return new StandardKernel(new ServiceModule());
         }
-
-        protected override void RegisterCustomBehavior()
-        {
-            base.RegisterCustomBehavior();
-
-            TimeServiceHostFactory.SetResolutionRoot(Kernel);
-        }
-
-        #endregion
     }
 }

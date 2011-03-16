@@ -24,11 +24,14 @@ namespace Ninject.Extensions.Wcf
     /// <summary>
     /// 
     /// </summary>
-    public abstract class NinjectServiceHostFactory : ServiceHostFactory
+    public class NinjectServiceHostFactory : ServiceHostFactory
     {
-        private readonly object locker = new object();
+        private static IKernel kernel;
 
-        protected abstract Func<Type, Uri[], ServiceHost> ServiceHostFactory { get; }
+        public static void SetKernel(IKernel kernel)
+        {
+            NinjectServiceHostFactory.kernel = kernel;
+        }
 
         /// <summary>
         /// Creates a <see cref="T:System.ServiceModel.ServiceHost"/> for a
@@ -47,10 +50,9 @@ namespace Ninject.Extensions.Wcf
         /// </returns>
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            lock (this.locker)
-            {
-                return this.ServiceHostFactory(serviceType, baseAddresses);
-            }
+            var serviceTypeParameter = new ConstructorArgument("serviceType", serviceType);
+            var baseAddressesParameter = new ConstructorArgument("baseAddresses", baseAddresses);
+            return kernel.Get<ServiceHost>(serviceTypeParameter, baseAddressesParameter);
         }
     }
 }

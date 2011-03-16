@@ -24,7 +24,7 @@ namespace WcfTimeService
     /// When self-hosting and injecting the service instance, the InstanceContextMode must be set to Single.
     /// If you are using the IIS hosting, you must remove this attribute.
     /// </summary>
-    [ServiceBehavior( InstanceContextMode = InstanceContextMode.Single )]
+    //[ServiceBehavior( InstanceContextMode = InstanceContextMode.Single )]
     public class TimeService : ITimeService
     {
         private readonly ISystemClock _systemClock;

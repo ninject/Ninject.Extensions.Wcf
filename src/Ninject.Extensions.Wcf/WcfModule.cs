@@ -35,7 +35,6 @@ namespace Ninject.Extensions.Wcf
         {
             this.Bind<NinjectServiceBehavior>().ToSelf();
             this.Bind<NinjectInstanceProvider>().ToSelf();
-            this.Bind<NinjectServiceHostFactory>().ToSelf();
 
             this.Bind<Func<IServiceBehavior>>().ToMethod(ctx => () => ctx.Kernel.Get<NinjectServiceBehavior>());
             this.Bind<Func<Type, IInstanceProvider>>().ToMethod(ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
