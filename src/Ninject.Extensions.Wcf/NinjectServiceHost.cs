@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,21 +6,14 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-using System.ServiceModel;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+    using System.ServiceModel;
     using System.ServiceModel.Description;
 
     /// <summary>
-    /// 
+    /// A service host that uses Ninject to create the service instances.
     /// </summary>
     public class NinjectServiceHost : ServiceHost
     {

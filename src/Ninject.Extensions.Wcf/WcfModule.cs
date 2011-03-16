@@ -26,6 +26,9 @@ namespace Ninject.Extensions.Wcf
     using Modules;
     using Parameters;
 
+    /// <summary>
+    /// A ninject module that defines the bindings that are used to create the services for the wcf extension.
+    /// </summary>
     public class WcfModule : NinjectModule
     {
         /// <summary>

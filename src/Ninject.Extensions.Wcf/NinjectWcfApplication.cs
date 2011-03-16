@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -7,8 +5,6 @@
 // Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 // See the file LICENSE.txt for details.
 // 
-
-#endregion
 
 namespace Ninject.Extensions.Wcf
 {
@@ -18,16 +14,22 @@ namespace Ninject.Extensions.Wcf
     using System.Web;
     using Ninject.Infrastructure;
 
+    /// <summary>
+    /// Base class for web hosted ninject applications.
+    /// </summary>
     public abstract class NinjectWcfApplication : HttpApplication, IHaveKernel
     {
-        private static IKernel _kernel;
+        /// <summary>
+        /// The ninject kernel.
+        /// </summary>
+        private static IKernel kernel;
 
         /// <summary>
         /// Gets the kernel.
         /// </summary>
         public IKernel Kernel
         {
-            get { return _kernel; }
+            get { return kernel; }
         }
 
         /// <summary>
@@ -35,14 +37,14 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The System.EventArgs instance containing the event data.</param>
-        protected virtual void Application_Start( object sender, EventArgs e )
+        protected virtual void Application_Start(object sender, EventArgs e)
         {
-            lock ( this )
+            lock (this)
             {
-                _kernel = CreateKernel();
-                NinjectServiceHostFactory.SetKernel(_kernel);
-                RegisterCustomBehavior();
-                OnApplicationStarted();
+                kernel = this.CreateKernel();
+                NinjectServiceHostFactory.SetKernel(kernel);
+                this.RegisterCustomBehavior();
+                this.OnApplicationStarted();
             }
         }
 
@@ -51,7 +53,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The System.EventArgs instance containing the event data.</param>
-        protected virtual void Session_Start( object sender, EventArgs e )
+        protected virtual void Session_Start(object sender, EventArgs e)
         {
         }
 
@@ -60,7 +62,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The System.EventArgs instance containing the event data.</param>
-        protected virtual void Application_BeginRequest( object sender, EventArgs e )
+        protected virtual void Application_BeginRequest(object sender, EventArgs e)
         {
         }
 
@@ -69,7 +71,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The System.EventArgs instance containing the event data.</param>
-        protected virtual void Application_AuthenticateRequest( object sender, EventArgs e )
+        protected virtual void Application_AuthenticateRequest(object sender, EventArgs e)
         {
         }
 
@@ -78,7 +80,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The System.EventArgs instance containing the event data.</param>
-        protected virtual void Application_Error( object sender, EventArgs e )
+        protected virtual void Application_Error(object sender, EventArgs e)
         {
         }
 
@@ -87,7 +89,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The System.EventArgs instance containing the event data.</param>
-        protected virtual void Session_End( object sender, EventArgs e )
+        protected virtual void Session_End(object sender, EventArgs e)
         {
         }
 
@@ -96,17 +98,17 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The System.EventArgs instance containing the event data.</param>
-        protected virtual void Application_End( object sender, EventArgs e )
+        protected virtual void Application_End(object sender, EventArgs e)
         {
-            lock ( this )
+            lock (this)
             {
-                if ( _kernel != null )
+                if (kernel != null)
                 {
-                    _kernel.Dispose();
-                    _kernel = null;
+                    kernel.Dispose();
+                    kernel = null;
                 }
 
-                OnApplicationStopped();
+                this.OnApplicationStopped();
             }
         }
 
@@ -123,9 +125,9 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         protected virtual void RegisterCustomBehavior()
         {
-            if (_kernel.GetBindings(typeof(ServiceHost)).Count() == 0)
+            if (kernel.GetBindings(typeof(ServiceHost)).Count() == 0)
             {
-                _kernel.Bind<ServiceHost>().To<NinjectServiceHost>();
+                kernel.Bind<ServiceHost>().To<NinjectServiceHost>();
             }
         }
 

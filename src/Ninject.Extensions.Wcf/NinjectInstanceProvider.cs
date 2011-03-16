@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -7,8 +5,6 @@
 // Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 // See the file LICENSE.txt for details.
 // 
-
-#endregion
 
 namespace Ninject.Extensions.Wcf
 {
@@ -19,12 +15,18 @@ namespace Ninject.Extensions.Wcf
     using Syntax;
 
     /// <summary>
-    /// 
+    /// An instance provider that uses Ninject to create the instance.
     /// </summary>
     public class NinjectInstanceProvider : IInstanceProvider
     {
-        private readonly Type _serviceType;
+        /// <summary>
+        /// The type of the service.
+        /// </summary>
+        private readonly Type serviceType;
 
+        /// <summary>
+        /// The resolution root that is used to create the instance.
+        /// </summary>
         private readonly IResolutionRoot resolutionRoot;
 
         /// <summary>
@@ -32,17 +34,14 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
         /// <param name="resolutionRoot">The resolution root.</param>
-        public NinjectInstanceProvider( Type serviceType, IResolutionRoot resolutionRoot )
+        public NinjectInstanceProvider(Type serviceType, IResolutionRoot resolutionRoot)
         {
-            _serviceType = serviceType;
+            this.serviceType = serviceType;
             this.resolutionRoot = resolutionRoot;
         }
 
-        #region Implementation of IInstanceProvider
-
         /// <summary>
-        /// Returns a service object given the specified <see
-        /// cref="T:System.ServiceModel.InstanceContext" /> object.
+        /// Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext" /> object.
         /// </summary>
         /// <returns>
         /// A user-defined service object.
@@ -51,14 +50,13 @@ namespace Ninject.Extensions.Wcf
         /// The current <see cref="T:System.ServiceModel.InstanceContext" />
         /// object.
         /// </param>
-        public object GetInstance( InstanceContext instanceContext )
+        public object GetInstance(InstanceContext instanceContext)
         {
-            return this.GetInstance( instanceContext, null );
+            return this.GetInstance(instanceContext, null);
         }
 
         /// <summary>
-        /// Returns a service object given the specified <see
-        /// cref="T:System.ServiceModel.InstanceContext" /> object.
+        /// Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext" /> object.
         /// </summary>
         /// <returns>
         /// The service object.
@@ -70,9 +68,9 @@ namespace Ninject.Extensions.Wcf
         /// <param name="message">
         /// The message that triggered the creation of a service object.
         /// </param>
-        public object GetInstance( InstanceContext instanceContext, Message message )
+        public object GetInstance(InstanceContext instanceContext, Message message)
         {
-            return this.resolutionRoot.Get( _serviceType );
+            return this.resolutionRoot.Get(this.serviceType);
         }
 
         /// <summary>
@@ -85,10 +83,8 @@ namespace Ninject.Extensions.Wcf
         /// <param name="instance">
         /// The service object to be recycled.
         /// </param>
-        public void ReleaseInstance( InstanceContext instanceContext, object instance )
+        public void ReleaseInstance(InstanceContext instanceContext, object instance)
         {
         }
-
-        #endregion
     }
 }

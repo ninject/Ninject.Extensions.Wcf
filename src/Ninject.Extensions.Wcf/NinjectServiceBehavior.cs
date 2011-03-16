@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,22 +6,15 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
     using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     /// <summary>
     /// Service behavior implementation for Ninject.
@@ -40,8 +31,6 @@ namespace Ninject.Extensions.Wcf
         {
             this.instanceProviderFactory = instanceProviderFactory;
         }
-
-        #region Implementation of IServiceBehavior
 
         /// <summary>
         /// Provides the ability to inspect the service host and the service
@@ -104,7 +93,5 @@ namespace Ninject.Extensions.Wcf
                     this.instanceProviderFactory(serviceDescription.ServiceType);
             }
         }
-
-        #endregion
     }
 }

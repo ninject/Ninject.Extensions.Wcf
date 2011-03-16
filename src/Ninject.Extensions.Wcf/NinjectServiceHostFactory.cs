@@ -1,5 +1,3 @@
-#region License
-
 // 
 // Author: Ian Davis <ian@innovatian.com>
 // Copyright (c) 2009-2010, Innovatian Software, LLC
@@ -8,29 +6,30 @@
 // See the file LICENSE.txt for details.
 // 
 
-#endregion
-
-#region Using Directives
-
-using System;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using Ninject.Parameters;
-
-#endregion
-
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using Ninject.Parameters;
+
     /// <summary>
     /// 
     /// </summary>
     public class NinjectServiceHostFactory : ServiceHostFactory
     {
-        private static IKernel kernel;
+        /// <summary>
+        /// The kernel that is used to create instances.
+        /// </summary>
+        private static IKernel kernelInstance;
 
+        /// <summary>
+        /// Sets the kernel on this instance.
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
         public static void SetKernel(IKernel kernel)
         {
-            NinjectServiceHostFactory.kernel = kernel;
+            kernelInstance = kernel;
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace Ninject.Extensions.Wcf
         {
             var serviceTypeParameter = new ConstructorArgument("serviceType", serviceType);
             var baseAddressesParameter = new ConstructorArgument("baseAddresses", baseAddresses);
-            return kernel.Get<ServiceHost>(serviceTypeParameter, baseAddressesParameter);
+            return kernelInstance.Get<ServiceHost>(serviceTypeParameter, baseAddressesParameter);
         }
     }
 }
