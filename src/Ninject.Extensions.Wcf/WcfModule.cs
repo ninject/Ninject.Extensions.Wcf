@@ -36,10 +36,9 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         public override void Load()
         {
-            this.Bind<NinjectServiceBehavior>().ToSelf();
             this.Bind<NinjectInstanceProvider>().ToSelf();
+            this.Bind<IServiceBehavior>().To<NinjectServiceBehavior>();
 
-            this.Bind<Func<IServiceBehavior>>().ToMethod(ctx => () => ctx.Kernel.Get<NinjectServiceBehavior>());
             this.Bind<Func<Type, IInstanceProvider>>().ToMethod(ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
             this.Bind<Func<Type, Uri[], ServiceHost>>().ToMethod(
                 ctx =>
