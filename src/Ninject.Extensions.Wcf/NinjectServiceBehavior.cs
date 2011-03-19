@@ -21,15 +21,29 @@ namespace Ninject.Extensions.Wcf
     /// </summary>
     public class NinjectServiceBehavior : IServiceBehavior
     {
+        /// <summary>
+        /// Factroy method to create instance providers
+        /// </summary>
         private readonly Func<Type, IInstanceProvider> instanceProviderFactory;
+
+        /// <summary>
+        /// The <see cref="IDispatchMessageInspector"/> that is attached to each end point
+        /// dispatcher to cleanup the request scope objects in the ninject cache after each
+        /// operation. 
+        /// </summary>
+        private readonly IDispatchMessageInspector requestScopeCleanUp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NinjectServiceBehavior"/> class.
         /// </summary>
         /// <param name="instanceProviderFactory">The instance provider factory.</param>
-        public NinjectServiceBehavior(Func<Type, IInstanceProvider> instanceProviderFactory)
+        /// <param name="requestScopeCleanUp">The <see cref="IDispatchMessageInspector"/> 
+        /// that is attached to each end point dispatcher to cleanup the request scope 
+        /// objects in the ninject cache after each operation.</param>
+        public NinjectServiceBehavior(Func<Type, IInstanceProvider> instanceProviderFactory, IDispatchMessageInspector requestScopeCleanUp)
         {
             this.instanceProviderFactory = instanceProviderFactory;
+            this.requestScopeCleanUp = requestScopeCleanUp;
         }
 
         /// <summary>
@@ -91,6 +105,7 @@ namespace Ninject.Extensions.Wcf
             {
                 endpointDispatcher.DispatchRuntime.InstanceProvider =
                     this.instanceProviderFactory(serviceDescription.ServiceType);
+                endpointDispatcher.DispatchRuntime.MessageInspectors.Add(this.requestScopeCleanUp);
             }
         }
     }

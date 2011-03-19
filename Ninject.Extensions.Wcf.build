@@ -7,7 +7,7 @@
 	<property name="product.description" value="WCF Extension for Ninject" overwrite="false"/>
 	<property name="product.platforms" value="net-3.5,net-4.0,mono-2.0"  overwrite="false"/>
 	<property name="product.buildserverPlatforms" value="net-3.5,net-4.0,mono-2.0"  overwrite="false"/>
-	<property name="dependencies" value="Ninject" overwrite="false"/>
+	<property name="dependencies" value="Ninject,Ninject.Web.Common" overwrite="false"/>
 
 	<include buildfile="Ninject.include" />
 	<target name="all" depends="core csl"/>
@@ -27,6 +27,7 @@
 				<include name="System.Web.dll"/>
 				<include name="System.Core.dll"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
 			</references>
 		</csc>
 	</target>
@@ -87,6 +88,7 @@
                 <include name="xunit.should.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
 				<include name="${path.lib}/Ninject.Extensions.ContextPreservation/${build.platform}/Ninject.Extensions.ContextPreservation.dll"/>
 			</references>
 			<nowarn>

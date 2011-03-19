@@ -14,7 +14,7 @@ namespace Ninject.Extensions.Wcf
     using Ninject.Parameters;
 
     /// <summary>
-    /// 
+    /// The host factory for NinjectServiceHosts
     /// </summary>
     public class NinjectServiceHostFactory : ServiceHostFactory
     {

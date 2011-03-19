@@ -10,6 +10,7 @@ namespace WcfTimeService
 {
     using Ninject.Modules;
     using Ninject.Syntax;
+    using Ninject.Web.Common;
 
     /// <summary>
     /// The module declaring the bindings of the service.
@@ -23,8 +24,9 @@ namespace WcfTimeService
         {
             this.Bind<IResolutionRoot>().ToConstant(this.Kernel);
 
-            Bind<ITimeService>().To<TimeService>().InSingletonScope();
-            Bind<ISystemClock>().To<SystemClock>().InSingletonScope();
+            //Bind<TimeService>().To<TimeService>().InRequestScope();
+            Bind<ITimeService>().To<TimeService>();//.InRequestScope();
+            Bind<ISystemClock>().To<SystemClock>().InRequestScope();
         }
     }
 }

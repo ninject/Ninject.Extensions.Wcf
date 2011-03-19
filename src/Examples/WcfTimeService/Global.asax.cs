@@ -9,12 +9,12 @@
 namespace WcfTimeService
 {
     using Ninject;
-    using Ninject.Extensions.Wcf;
+    using Ninject.Web.Common;
 
     /// <summary>
     /// The wcf application.
     /// </summary>
-    public class Global : NinjectWcfApplication
+    public class Global : NinjectHttpApplication
     {
         /// <summary>
         /// Creates the kernel that will manage your application.

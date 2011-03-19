@@ -15,13 +15,13 @@ namespace TimeService.Client
 
     internal class Program
     {
-        private const int QUERIES = 5;
+        private const int QUERIES = 500;
         private const int SLEEP = 1 * 1000;
-        private const bool useSelfHosted = false;
+        private const bool UseSelfHosted = true;
 
         private static void Main()
         {
-            TimeServiceClient client = GetTimeService(useSelfHosted);
+            TimeServiceClient client = GetTimeService(UseSelfHosted);
             Query(client);
             client.Close();
         }

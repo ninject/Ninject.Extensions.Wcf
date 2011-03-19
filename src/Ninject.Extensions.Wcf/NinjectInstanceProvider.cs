@@ -12,7 +12,6 @@ namespace Ninject.Extensions.Wcf
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using Syntax;
 
     /// <summary>
     /// An instance provider that uses Ninject to create the instance.
@@ -27,17 +26,17 @@ namespace Ninject.Extensions.Wcf
         /// <summary>
         /// The resolution root that is used to create the instance.
         /// </summary>
-        private readonly IResolutionRoot resolutionRoot;
+        private readonly IKernel kernel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NinjectInstanceProvider"/> class.
         /// </summary>
         /// <param name="serviceType">Type of the service.</param>
-        /// <param name="resolutionRoot">The resolution root.</param>
-        public NinjectInstanceProvider(Type serviceType, IResolutionRoot resolutionRoot)
+        /// <param name="kernel">The kernel.</param>
+        public NinjectInstanceProvider(Type serviceType, IKernel kernel)
         {
             this.serviceType = serviceType;
-            this.resolutionRoot = resolutionRoot;
+            this.kernel = kernel;
         }
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace Ninject.Extensions.Wcf
         /// </param>
         public object GetInstance(InstanceContext instanceContext, Message message)
         {
-            return this.resolutionRoot.Get(this.serviceType);
+            return this.kernel.Get(this.serviceType);
         }
 
         /// <summary>

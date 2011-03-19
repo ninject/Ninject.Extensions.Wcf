@@ -24,6 +24,9 @@ namespace Ninject.Extensions.Wcf
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
     using Modules;
+
+    using Ninject.Web.Common;
+
     using Parameters;
 
     /// <summary>
@@ -36,8 +39,12 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         public override void Load()
         {
+            this.Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfHttpApplicationPlugin>();
+
             this.Bind<NinjectInstanceProvider>().ToSelf();
             this.Bind<IServiceBehavior>().To<NinjectServiceBehavior>();
+            this.Bind<IDispatchMessageInspector>().To<WcfRequestScopeCleanup>()
+                .WithConstructorArgument("releaseScopeAtRequestEnd", ctx => ctx.Kernel.Settings.Get("ReleaseScopeAtRequestEnd", true));
 
             this.Bind<Func<Type, IInstanceProvider>>().ToMethod(ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
             this.Bind<Func<Type, Uri[], ServiceHost>>().ToMethod(

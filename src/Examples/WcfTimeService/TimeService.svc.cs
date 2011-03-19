@@ -9,13 +9,14 @@
 namespace WcfTimeService
 {
     using System;
+    using System.ServiceModel;
 
     /// <summary>
     /// When self-hosting and injecting the service instance, the InstanceContextMode must be set to Single.
     /// If you are using the IIS hosting, you must remove this attribute.
     /// </summary>
-    //// [ServiceBehavior( InstanceContextMode = InstanceContextMode.Single )]
-    public class TimeService : ITimeService
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    public class TimeService : ITimeService, IDisposable
     {
         /// <summary>
         /// The system clock to get the current time.
@@ -48,6 +49,10 @@ namespace WcfTimeService
         public DateTime WhatTimeIsIt()
         {
             return this.systemClock.Now;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
