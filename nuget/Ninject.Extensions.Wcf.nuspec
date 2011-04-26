@@ -9,6 +9,9 @@
     <description>Ninject WCF extensions</description>
     <summary></summary>
     <language>en-US</language>
+	<tags>Ninject ioc di wcf</tags>
+	<iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
+	<projectUrl>http://www.ninject.org</projectUrl>
     <dependencies>
       <dependency id="Ninject" version="{NinjectVersion}" />
     </dependencies> 
