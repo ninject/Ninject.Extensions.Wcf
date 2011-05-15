@@ -65,7 +65,6 @@
 		<copy todir="${current.path.test}">
 			<fileset basedir="${path.tools.xunit}">
 				<include name="xunit.dll"/>
-				<include name="xunit.should.dll"/>
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test}" if="${not(string::contains(build.platform, 'net-4.0'))}">
@@ -91,7 +90,6 @@
 				<include name="System.Core.dll"/>
 				<include name="Moq.dll"/>
 				<include name="xunit.dll"/>
-				<include name="xunit.should.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
@@ -124,10 +122,11 @@
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test}">
-			<fileset basedir="${path.tools.unitdriven}">
-				<include name="UnitDrivenLight.dll"/>
+			<fileset basedir="${path.tools.xunit.sl}${build.platform}">
+				<include name="*.dll"/>
 			</fileset>
 		</copy>
+		
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 		 output="${current.path.test}/${product.assembly.silverlighttestdll}">
 			<sources basedir="${path.src}">
@@ -144,11 +143,14 @@
 				<include name="System.Windows.dll"/>
 				<include name="System.Windows.Browser.dll"/>
 				<include name="System.Net.dll"/>
-				<include name="Moq.Silverlight.dll"/>
-				<include name="Castle.Core.dll" if="${string::contains(build.platform, 'silverlight-4.0')}"/>
+				<include name="Microsoft.Phone.dll" if="${string::contains(build.platform, 'wp7')}"/>
+				<include name="Microsoft.Phone.Interop.dll" if="${string::contains(build.platform, 'wp7')}"/>
+				<include name="Moq.Silverlight.dll" unless="${string::contains(build.platform, 'wp7')}"/>
+				<include name="Castle.Core.dll" if="${build.platform == 'silverlight-4.0'}"/>
 				<include name="Castle.Core-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0')}"/>
 				<include name="Castle.DynamicProxy-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0')}"/>
-				<include name="UnitDrivenLight.dll"/>
+				<include name="xunit.runner.silverlight.dll"/>
+				<include name="xunit-silverlight.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${path.lib}/Ninject.Extensions.ContextPreservation/${build.platform}/Ninject.Extensions.ContextPreservation.dll"/>
