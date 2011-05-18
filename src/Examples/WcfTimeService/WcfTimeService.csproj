@@ -60,6 +60,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
@@ -73,13 +74,17 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="TimeService.svc" />
+    <Content Include="TimeService2.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IMyTimeZone.cs" />
     <Compile Include="ISystemClock.cs" />
+    <Compile Include="ITimeService2.cs" />
+    <Compile Include="MyTimeZoneImplementer.cs" />
     <Compile Include="ServiceModule.cs" />
     <Compile Include="SystemClock.cs" />
     <Compile Include="TimeService.svc.cs">
@@ -87,6 +92,9 @@
     </Compile>
     <Compile Include="ITimeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeService2.svc.cs">
+      <DependentUpon>TimeService2.svc</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj">

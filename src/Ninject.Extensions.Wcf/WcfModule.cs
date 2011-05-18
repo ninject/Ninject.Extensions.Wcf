@@ -51,6 +51,7 @@ namespace Ninject.Extensions.Wcf
                 ctx =>
                 (serviceType, baseAddresses) =>
                 ctx.Kernel.Get<NinjectServiceHost>(new ConstructorArgument("serviceType", serviceType), new ConstructorArgument("baseAddresses", baseAddresses)));
+                
         }
     }
 }

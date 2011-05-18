@@ -27,6 +27,8 @@ namespace WcfTimeService
             //Bind<TimeService>().To<TimeService>().InRequestScope();
             Bind<ITimeService>().To<TimeService>();//.InRequestScope();
             Bind<ISystemClock>().To<SystemClock>().InRequestScope();
+
+            Bind<IMyTimeZone>().To<MyTimeZoneImplementer>();
         }
     }
 }
