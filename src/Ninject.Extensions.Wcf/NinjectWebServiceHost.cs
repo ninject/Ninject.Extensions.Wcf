@@ -74,7 +74,7 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         protected override void OnOpening()
         {
-            Description.Behaviors.Add(this.serviceBehavior);
+            Description.Behaviors.Add(serviceBehavior);
             base.OnOpening();
         }
     }

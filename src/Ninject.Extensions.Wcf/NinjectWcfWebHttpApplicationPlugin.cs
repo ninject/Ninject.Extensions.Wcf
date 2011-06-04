@@ -6,11 +6,11 @@ namespace Ninject.Extensions.Wcf
     using Ninject.Web.Common;
     using System.ServiceModel.Web;
 
-    public class NinjectWcfWebHttpApplicaitonPlugin : NinjectComponent, INinjectHttpApplicationPlugin
+    public class NinjectWcfWebHttpApplicationPlugin : NinjectComponent, INinjectHttpApplicationPlugin
     {
         private readonly IKernel kernel;
 
-        public NinjectWcfWebHttpApplicaitonPlugin(IKernel kernel)
+        public NinjectWcfWebHttpApplicationPlugin(IKernel kernel)
         {
             this.kernel = kernel;
         }
@@ -25,8 +25,8 @@ namespace Ninject.Extensions.Wcf
 
         public void Start()
         {
-            NinjectWebServiceHostFactory.SetKernel(this.kernel);
-            this.RegisterCustomBehavior();
+            NinjectWebServiceHostFactory.SetKernel(kernel);
+            RegisterCustomBehavior();
         }
 
         public void Stop()
@@ -40,8 +40,8 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         protected virtual void RegisterCustomBehavior()
         {
-            if (this.kernel.GetBindings(typeof(WebServiceHost)).Count() == 0) {
-                this.kernel.Bind<WebServiceHost>().To<NinjectWebServiceHost>().Named("webService");
+            if (kernel.GetBindings(typeof(WebServiceHost)).Count() == 0) {
+                kernel.Bind<WebServiceHost>().To<NinjectWebServiceHost>().Named("webService");
             }
         }
     }
