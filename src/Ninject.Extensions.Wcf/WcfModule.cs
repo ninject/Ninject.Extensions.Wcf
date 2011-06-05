@@ -28,9 +28,10 @@ namespace Ninject.Extensions.Wcf
     using Ninject.Web.Common;
 
     using Parameters;
+    using System.ServiceModel.Web;
 
     /// <summary>
-    /// A ninject module that defines the bindings that are used to create the services for the wcf extension.
+    /// A inject module that defines the bindings that are used to create the services for the wcf extension.
     /// </summary>
     public class WcfModule : NinjectModule
     {
@@ -39,18 +40,25 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         public override void Load()
         {
-            this.Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfHttpApplicationPlugin>();
+            Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfHttpApplicationPlugin>();
+            Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfWebHttpApplicationPlugin>();
 
-            this.Bind<NinjectInstanceProvider>().ToSelf();
-            this.Bind<IServiceBehavior>().To<NinjectServiceBehavior>();
-            this.Bind<IDispatchMessageInspector>().To<WcfRequestScopeCleanup>()
+            Bind<NinjectInstanceProvider>().ToSelf();
+            Bind<IServiceBehavior>().To<NinjectServiceBehavior>();
+            Bind<IDispatchMessageInspector>().To<WcfRequestScopeCleanup>()
                 .WithConstructorArgument("releaseScopeAtRequestEnd", ctx => ctx.Kernel.Settings.Get("ReleaseScopeAtRequestEnd", true));
 
-            this.Bind<Func<Type, IInstanceProvider>>().ToMethod(ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
-            this.Bind<Func<Type, Uri[], ServiceHost>>().ToMethod(
+            Bind<Func<Type, IInstanceProvider>>().ToMethod(ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
+            Bind<Func<Type, Uri[], ServiceHost>>().ToMethod(
                 ctx =>
                 (serviceType, baseAddresses) =>
                 ctx.Kernel.Get<NinjectServiceHost>(new ConstructorArgument("serviceType", serviceType), new ConstructorArgument("baseAddresses", baseAddresses)));
+
+            Bind<Func<Type, Uri[], WebServiceHost>>().ToMethod(
+                ctx =>
+                (serviceType, baseAddresses) =>
+                ctx.Kernel.Get<NinjectWebServiceHost>(new ConstructorArgument("serviceType", serviceType), new ConstructorArgument("baseAddresses", baseAddresses)));
+                
         }
     }
 }
