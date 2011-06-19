@@ -1,7 +1,7 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="Global.asax.cs" company="Ninject Project Contributors">
+// <copyright file="ITimeWebService.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Author: Ian Davis (ian@innovatian.com)
+//   Author: Cedric Bertolasio
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 //   you may not use this file except in compliance with one of the Licenses.
@@ -19,23 +19,33 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace WcfTimeService
+namespace WcfTimeService.TimeWebService
 {
-    using Ninject;
-    using Ninject.Web.Common;
+    using System;
+    using System.ServiceModel;
+    using System.ServiceModel.Web;
 
     /// <summary>
-    /// The wcf application.
+    /// Time web service
     /// </summary>
-    public class Global : NinjectHttpApplication
+    [ServiceContract]
+    public interface ITimeWebService
     {
         /// <summary>
-        /// Creates the kernel that will manage your application.
+        /// Returns the current time
         /// </summary>
-        /// <returns>The created kernel.</returns>
-        protected override IKernel CreateKernel()
-        {
-            return new StandardKernel(new ServiceModule());
-        }
+        /// <returns>The current time.</returns>
+        [WebGet(UriTemplate = "")]
+        [OperationContract]
+        DateTime WhatTimeIsIt();
+
+        /// <summary>
+        /// Adds some months to the current time.
+        /// </summary>
+        /// <param name="months">The months to add.</param>
+        /// <returns>The current date time plus the given months.</returns>
+        [OperationContract]
+        [WebInvoke(UriTemplate = "", Method = "POST")]
+        DateTime AddMonths(int months);
     }
 }

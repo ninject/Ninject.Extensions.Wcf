@@ -25,6 +25,7 @@
 				<include name="System.dll"/>
 				<include name="System.ServiceModel.dll"/>
 				<include name="System.ServiceModel.Activation.dll"/>
+				<include name="System.ServiceModel.Web.dll"/>
 				<include name="System.Web.dll"/>
 				<include name="System.Core.dll"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>

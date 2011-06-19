@@ -40,7 +40,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SINGLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -69,6 +69,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -80,8 +81,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\WcfTimeService\InstanceContextModeDefinition.cs">
+      <Link>InstanceContextModeDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\WcfTimeService\ISystemClock.cs">
+      <Link>ISystemClock.cs</Link>
+    </Compile>
     <Compile Include="..\WcfTimeService\ServiceModule.cs">
       <Link>ServiceModule.cs</Link>
+    </Compile>
+    <Compile Include="..\WcfTimeService\SystemClock.cs">
+      <Link>SystemClock.cs</Link>
+    </Compile>
+    <Compile Include="..\WcfTimeService\TimeService\ITimeService.cs">
+      <Link>TimeService\ITimeService.cs</Link>
+    </Compile>
+    <Compile Include="..\WcfTimeService\TimeService\TimeService.svc.cs">
+      <Link>TimeService\TimeService.svc.cs</Link>
+    </Compile>
+    <Compile Include="..\WcfTimeService\TimeWebService\ITimeWebService.cs">
+      <Link>TimeWebService\ITimeWebService.cs</Link>
+    </Compile>
+    <Compile Include="..\WcfTimeService\TimeWebService\TimeWebService.svc.cs">
+      <Link>TimeWebService\TimeWebService.svc.cs</Link>
     </Compile>
     <Compile Include="WindowsTimeService.cs">
       <SubType>Component</SubType>
@@ -97,10 +119,6 @@
     <ProjectReference Include="..\..\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj">
       <Project>{95906A18-0F51-4FFC-96AE-27F9A147BBAA}</Project>
       <Name>Ninject.Extensions.Wcf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WcfTimeService\WcfTimeService.csproj">
-      <Project>{1DC40C0B-580D-4BAD-A113-5E9D3FBDDBBD}</Project>
-      <Name>WcfTimeService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

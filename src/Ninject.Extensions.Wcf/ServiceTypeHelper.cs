@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------
-// <copyright file="WindowsTimeServiceModule.cs" company="Ninject Project Contributors">
+// <copyright file="ServiceTypeHelper.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Author: Daniel Marbach
+//   Author: Remo Gloor (remo.gloor@gmail.com)
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 //   you may not use this file except in compliance with one of the Licenses.
@@ -19,21 +19,30 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace WindowsTimeService
+namespace Ninject.Extensions.Wcf
 {
-    using Ninject.Modules;
+    using System.Linq;
+    using System.ServiceModel;
 
     /// <summary>
-    /// The module of the service.
+    /// Helper class to decide if a service is a singleton.
     /// </summary>
-    public class WindowsTimeServiceModule : NinjectModule
+    internal static class ServiceTypeHelper
     {
         /// <summary>
-        /// Loads the module into the kernel.
+        /// Determines whether the given service is a singleton service.
         /// </summary>
-        public override void Load()
+        /// <param name="service">The service.</param>
+        /// <returns>
+        ///     <c>true</c> if the service is a singleton; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsSingletonService(object service)
         {
-            this.Bind<WindowsTimeService>().ToSelf();
+            var serviceBehaviorAttribute =
+                service.GetType().GetCustomAttributes(typeof(ServiceBehaviorAttribute), true)
+                .Cast<ServiceBehaviorAttribute>()
+                .SingleOrDefault();
+            return serviceBehaviorAttribute != null && serviceBehaviorAttribute.InstanceContextMode == InstanceContextMode.Single;
         }
     }
 }

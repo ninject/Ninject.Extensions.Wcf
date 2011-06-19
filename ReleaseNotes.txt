@@ -1,0 +1,4 @@
+Version 2.4.0.0
+---------------
+- Added: Support for restful services
+- Added: NinjectServiceHost<T> to support creation of self hosted services without having to define ServiceHost bindings

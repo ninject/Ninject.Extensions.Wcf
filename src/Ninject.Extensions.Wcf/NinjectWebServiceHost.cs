@@ -1,9 +1,33 @@
+//-------------------------------------------------------------------------------
+// <copyright file="NinjectWebServiceHost.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Author: Ian Davis (ian@innovatian.com)
+//
+//   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+//   you may not use this file except in compliance with one of the Licenses.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//   or
+//       http://www.microsoft.com/opensource/licenses.mspx
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+// </copyright>
+//-------------------------------------------------------------------------------
+
 namespace Ninject.Extensions.Wcf
 {
     using System;
-    using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.ServiceModel.Web;
+
+    /// <summary>
+    /// A web service host that uses Ninject to create the service instances.
+    /// </summary>
     public class NinjectWebServiceHost : WebServiceHost
     {
         /// <summary>
@@ -12,7 +36,7 @@ namespace Ninject.Extensions.Wcf
         private readonly IServiceBehavior serviceBehavior;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
+        /// Initializes a new instance of the <see cref="NinjectWebServiceHost"/> class.
         /// </summary>
         /// <param name="serviceBehavior">The behavior factory.</param>
         public NinjectWebServiceHost(IServiceBehavior serviceBehavior)
@@ -21,7 +45,7 @@ namespace Ninject.Extensions.Wcf
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
+        /// Initializes a new instance of the <see cref="NinjectWebServiceHost"/> class.
         /// </summary>
         /// <param name="serviceBehavior">The behavior factory.</param>
         /// <param name="serviceType">Type of the service.</param>
@@ -32,7 +56,7 @@ namespace Ninject.Extensions.Wcf
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
+        /// Initializes a new instance of the <see cref="NinjectWebServiceHost"/> class.
         /// </summary>
         /// <param name="serviceBehavior">The behavior factory.</param>
         /// <param name="singletonInstance">The singleton instance.</param>
@@ -43,7 +67,7 @@ namespace Ninject.Extensions.Wcf
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NinjectServiceHost"/> class.
+        /// Initializes a new instance of the <see cref="NinjectWebServiceHost"/> class.
         /// </summary>
         /// <param name="serviceBehavior">The behavior factory.</param>
         /// <param name="serviceType">Type of the service.</param>
@@ -53,28 +77,13 @@ namespace Ninject.Extensions.Wcf
         {
             this.serviceBehavior = serviceBehavior;
         }
-        public NinjectWebServiceHost()
-        {
-            
-        }
-        public NinjectWebServiceHost(object singletonInstance, params Uri[] baseAddresses)
-            : base(singletonInstance, baseAddresses)
-        {
-            
-        }
-        public NinjectWebServiceHost(Type serviceType, params Uri[] baseAddresses)
-            : base(serviceType, baseAddresses)
-        {
-            
-        }
          
-
         /// <summary>
         /// Invoked during the transition of a communication object into the opening state.
         /// </summary>
         protected override void OnOpening()
         {
-            Description.Behaviors.Add(serviceBehavior);
+            this.Description.Behaviors.Add(this.serviceBehavior);
             base.OnOpening();
         }
     }

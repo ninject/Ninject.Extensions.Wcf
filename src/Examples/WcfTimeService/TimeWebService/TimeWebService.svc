@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WcfTimeService.TimeWebService.TimeWebService" CodeBehind="TimeWebService.svc.cs" Factory="Ninject.Extensions.Wcf.NinjectWebServiceHostFactory" %>

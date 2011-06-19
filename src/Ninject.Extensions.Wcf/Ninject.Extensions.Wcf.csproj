@@ -85,16 +85,18 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="NinjectWebServiceBehavior.cs" />
+    <Compile Include="NinjectServiceHostFactory{T}.cs" />
+    <Compile Include="NinjectWebServiceHost{T}.cs" />
     <Compile Include="NinjectInstanceProvider.cs" />
+    <Compile Include="NinjectServiceHost{T}.cs" />
     <Compile Include="NinjectServiceBehavior.cs" />
     <Compile Include="NinjectServiceHost.cs" />
     <Compile Include="NinjectServiceHostFactory.cs" />
     <Compile Include="NinjectWcfHttpApplicationPlugin.cs" />
-    <Compile Include="NinjectWcfWebHttpApplicationPlugin.cs" />
     <Compile Include="NinjectWebServiceHost.cs" />
     <Compile Include="NinjectWebServiceHostFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceTypeHelper.cs" />
     <Compile Include="WcfModule.cs" />
     <Compile Include="WcfRequestScopeCleanup.cs" />
   </ItemGroup>

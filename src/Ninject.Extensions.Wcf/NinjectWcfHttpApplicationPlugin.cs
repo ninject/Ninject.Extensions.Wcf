@@ -1,12 +1,15 @@
 //-------------------------------------------------------------------------------
-// <copyright file="NinjectWcfHttpApplicationPlugin.cs" company="bbv Software Services AG">
-//   Copyright (c) 2010 bbv Software Services AG
+// <copyright file="NinjectWcfHttpApplicationPlugin.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Author: Remo Gloor (remo.gloor@gmail.com)
 //
-//   Licensed under the Apache License, Version 2.0 (the "License");
-//   you may not use this file except in compliance with the License.
+//   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+//   you may not use this file except in compliance with one of the Licenses.
 //   You may obtain a copy of the License at
 //
 //       http://www.apache.org/licenses/LICENSE-2.0
+//   or
+//       http://www.microsoft.com/opensource/licenses.mspx
 //
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +23,7 @@ namespace Ninject.Extensions.Wcf
 {
     using System.Linq;
     using System.ServiceModel;
-
+    using System.ServiceModel.Web;
     using Ninject.Components;
     using Ninject.Web.Common;
 
@@ -61,6 +64,7 @@ namespace Ninject.Extensions.Wcf
         public void Start()
         {
             NinjectServiceHostFactory.SetKernel(this.kernel);
+            NinjectWebServiceHostFactory.SetKernel(this.kernel);
             this.RegisterCustomBehavior();
         }
 
@@ -78,9 +82,14 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         protected virtual void RegisterCustomBehavior()
         {
-            if (this.kernel.GetBindings(typeof(ServiceHost)).Count() == 0)
+            if (!this.kernel.GetBindings(typeof(ServiceHost)).Any())
             {
                 this.kernel.Bind<ServiceHost>().To<NinjectServiceHost>();
+            }
+        
+            if (!this.kernel.GetBindings(typeof(WebServiceHost)).Any())
+            {
+                this.kernel.Bind<WebServiceHost>().To<NinjectWebServiceHost>();
             }
         }
     }

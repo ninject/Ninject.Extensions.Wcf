@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="ServiceLocatorServiceHostFactory.cs" company="Ninject Project Contributors">
+// <copyright file="NinjectServiceHostFactory{T}.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Author: Ian Davis (ian@innovatian.com)
 //
@@ -24,13 +24,31 @@ namespace Ninject.Extensions.Wcf
     using System;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
-    using Microsoft.Practices.ServiceLocation;
+    using Ninject.Parameters;
 
     /// <summary>
-    /// Service host factory using Service locator
+    /// The host factory for the specified ServiceHost
     /// </summary>
-    public class ServiceLocatorServiceHostFactory : ServiceHostFactory
+    /// <typeparam name="T">
+    /// The type of the service host
+    /// </typeparam>
+    public abstract class NinjectServiceHostFactory<T> : ServiceHostFactory
+        where T : ServiceHost
     {
+        /// <summary>
+        /// The kernel that is used to create instances.
+        /// </summary>
+        private static IKernel kernelInstance;
+
+        /// <summary>
+        /// Sets the kernel on this instance.
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
+        public static void SetKernel(IKernel kernel)
+        {
+            kernelInstance = kernel;
+        }
+
         /// <summary>
         /// Creates a <see cref="T:System.ServiceModel.ServiceHost"/> for a
         /// specified type of service with a specific base address.
@@ -48,8 +66,9 @@ namespace Ninject.Extensions.Wcf
         /// </returns>
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            var serviceHostCreator = (IServiceHostCreator)ServiceLocator.Current.GetService(typeof(IServiceHostCreator));
-            return serviceHostCreator.Create(serviceType, baseAddresses);
+            var serviceTypeParameter = new ConstructorArgument("serviceType", serviceType);
+            var baseAddressesParameter = new ConstructorArgument("baseAddresses", baseAddresses);
+            return kernelInstance.Get<T>(serviceTypeParameter, baseAddressesParameter);
         }
     }
 }

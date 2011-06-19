@@ -1,5 +1,5 @@
-//-------------------------------------------------------------------------------
-// <copyright file="NinjectWebServiceHostFactory.cs" company="Ninject Project Contributors">
+﻿//-------------------------------------------------------------------------------
+// <copyright file="ITimeService.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Author: Ian Davis (ian@innovatian.com)
 //
@@ -19,12 +19,22 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Wcf
+namespace WcfTimeService.TimeService
 {
+    using System;
+    using System.ServiceModel;
+
     /// <summary>
-    /// The host factory for NinjectWebServiceHosts
+    /// A service that provides the current time
     /// </summary>
-    public class NinjectWebServiceHostFactory : NinjectServiceHostFactory<NinjectWebServiceHost>
+    [ServiceContract]
+    public interface ITimeService
     {
+        /// <summary>
+        /// Returns the current time
+        /// </summary>
+        /// <returns>The current time.</returns>
+        [OperationContract]
+        DateTime WhatTimeIsIt();
     }
 }

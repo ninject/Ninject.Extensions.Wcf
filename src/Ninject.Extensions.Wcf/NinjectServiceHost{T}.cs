@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------
-// <copyright file="WcfModule.cs" company="Ninject Project Contributors">
+// <copyright file="NinjectServiceHost{T}.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Author: Daniel Marbach
+//   Author: Remo Gloor (remo.gloor@gmail.com)
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 //   you may not use this file except in compliance with one of the Licenses.
@@ -21,33 +21,33 @@
 
 namespace Ninject.Extensions.Wcf
 {
-    using System;
+    using System.ServiceModel;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
-
-    using Modules;
-    using Ninject.Web.Common;
-    using Parameters;
 
     /// <summary>
-    /// A inject module that defines the bindings that are used to create the services for the wcf extension.
+    /// A service host that uses Ninject to create the service instances.
     /// </summary>
-    public class WcfModule : NinjectModule
+    /// <typeparam name="T">The type of the service</typeparam>
+    public class NinjectServiceHost<T> : NinjectServiceHost
     {
         /// <summary>
-        /// Loads the module into the kernel.
+        /// Initializes a new instance of the NinjectServiceHost class.
         /// </summary>
-        public override void Load()
+        /// <param name="serviceBehavior">The service behavior.</param>
+        /// <param name="instance">The instance.</param>
+        public NinjectServiceHost(IServiceBehavior serviceBehavior, T instance)
+            : base(serviceBehavior)
         {
-            Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfHttpApplicationPlugin>();
+            var addresses = new UriSchemeKeyedCollection();
 
-            this.Bind<NinjectInstanceProvider>().ToSelf();
-            this.Bind<IServiceBehavior>().To<NinjectServiceBehavior>();
-            this.Bind<IDispatchMessageInspector>().To<WcfRequestScopeCleanup>()
-                .WithConstructorArgument("releaseScopeAtRequestEnd", ctx => ctx.Kernel.Settings.Get("ReleaseScopeAtRequestEnd", true));
-
-            this.Bind<Func<Type, IInstanceProvider>>()
-                .ToMethod(ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
+            if (ServiceTypeHelper.IsSingletonService(instance))
+            {
+                this.InitializeDescription(instance, addresses);
+            }
+            else
+            {
+                this.InitializeDescription(typeof(T), addresses);
+            }
         }
     }
 }
