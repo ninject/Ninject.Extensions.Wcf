@@ -19,6 +19,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
+#if !MONO
 namespace Ninject.Extensions.Wcf
 {
     using System;
@@ -69,3 +70,4 @@ namespace Ninject.Extensions.Wcf
         }
     }
 }
+#endif

@@ -14,7 +14,7 @@
 	<target name="nuget-all" depends="nuget"/>
 
 	<target name="core" depends="init">
-		<copy todir="${current.path.build}/lib">
+		<copy todir="${current.path.build}/lib" unless="${build.platform == 'mono-2.0'}">
 			<fileset basedir="${path.lib}/DataServices/${build.platform}">
 				<include name="**/*.dll"/>
 				<include name="**/*.xml"/>
@@ -34,7 +34,7 @@
 				<include name="System.ServiceModel.Web.dll"/>
 				<include name="System.Web.dll"/>
 				<include name="System.Core.dll"/>
-				<include name="${path.lib}/DataServices/${build.platform}/System.Data.Services.dll"/>
+				<include name="${path.lib}/DataServices/${build.platform}/System.Data.Services.dll" unless="${build.platform == 'mono-2.0'}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
 			</references>

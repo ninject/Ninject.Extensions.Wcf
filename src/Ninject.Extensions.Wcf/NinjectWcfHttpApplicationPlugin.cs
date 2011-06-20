@@ -21,7 +21,9 @@
 
 namespace Ninject.Extensions.Wcf
 {
+#if !MONO
     using System.Data.Services;
+#endif
     using System.Linq;
     using System.ServiceModel;
     using System.ServiceModel.Web;
@@ -64,9 +66,10 @@ namespace Ninject.Extensions.Wcf
         /// </summary>
         public void Start()
         {
-            NinjectServiceHostFactory.SetKernel(this.kernel);
-            NinjectWebServiceHostFactory.SetKernel(this.kernel);
+            BaseNinjectServiceHostFactory.SetKernel(this.kernel);
+#if !MONO
             NinjectDataServiceHostFactory.SetKernel(this.kernel);
+#endif
             this.RegisterCustomBehavior();
         }
 
@@ -94,10 +97,12 @@ namespace Ninject.Extensions.Wcf
                 this.kernel.Bind<WebServiceHost>().To<NinjectWebServiceHost>();
             }
 
+#if !MONO
             if (!this.kernel.GetBindings(typeof(DataServiceHost)).Any())
             {
                 this.kernel.Bind<DataServiceHost>().To<NinjectDataServiceHost>();
             }
+#endif
         }
     }
 }
