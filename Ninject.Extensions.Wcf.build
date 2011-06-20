@@ -14,6 +14,12 @@
 	<target name="nuget-all" depends="nuget"/>
 
 	<target name="core" depends="init">
+		<copy todir="${current.path.build}/lib">
+			<fileset basedir="${path.lib}/DataServices/${build.platform}">
+				<include name="**/*.dll"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" output="${current.path.build}/${product.assembly}" doc="${current.path.build}/${product.docfile}" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
 			<sources basedir="${path.src}">
@@ -28,6 +34,7 @@
 				<include name="System.ServiceModel.Web.dll"/>
 				<include name="System.Web.dll"/>
 				<include name="System.Core.dll"/>
+				<include name="${path.lib}/DataServices/${build.platform}/System.Data.Services.dll"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
 			</references>

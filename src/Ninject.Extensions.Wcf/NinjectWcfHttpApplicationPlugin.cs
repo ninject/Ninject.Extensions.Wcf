@@ -21,6 +21,7 @@
 
 namespace Ninject.Extensions.Wcf
 {
+    using System.Data.Services;
     using System.Linq;
     using System.ServiceModel;
     using System.ServiceModel.Web;
@@ -65,6 +66,7 @@ namespace Ninject.Extensions.Wcf
         {
             NinjectServiceHostFactory.SetKernel(this.kernel);
             NinjectWebServiceHostFactory.SetKernel(this.kernel);
+            NinjectDataServiceHostFactory.SetKernel(this.kernel);
             this.RegisterCustomBehavior();
         }
 
@@ -90,6 +92,11 @@ namespace Ninject.Extensions.Wcf
             if (!this.kernel.GetBindings(typeof(WebServiceHost)).Any())
             {
                 this.kernel.Bind<WebServiceHost>().To<NinjectWebServiceHost>();
+            }
+
+            if (!this.kernel.GetBindings(typeof(DataServiceHost)).Any())
+            {
+                this.kernel.Bind<DataServiceHost>().To<NinjectDataServiceHost>();
             }
         }
     }

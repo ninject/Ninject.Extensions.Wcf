@@ -25,6 +25,7 @@ namespace TimeService.Client
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.Threading;
+
     using TimeService.Client.Services.Time;
 
     using WcfTimeService.TimeWebService;
@@ -47,7 +48,7 @@ namespace TimeService.Client
         /// <summary>
         /// If true the enpoint is set to the selfhosted service.
         /// </summary>
-        private const bool UseSelfHosted = true;
+        private const bool UseSelfHosted = false;
 
         /// <summary>
         /// Main method of the application
@@ -56,8 +57,26 @@ namespace TimeService.Client
         {
             TimeServiceClient client = GetTimeService(UseSelfHosted);
             var webServiceClient = CreateTimeWebService(UseSelfHosted);
-            Query(client, webServiceClient);
+            var bookAction = CreateBookAction(UseSelfHosted);
+            Query(client, webServiceClient, bookAction);
             client.Close();
+        }
+
+        /// <summary>
+        /// Creates the book action.
+        /// </summary>
+        /// <param name="selfHosted">if set to <c>true</c> a null action is returned, otherwise a AddAndDisplayBooksAction.</param>
+        /// <returns>the newly created action.</returns>
+        private static IBookAction CreateBookAction(bool selfHosted)
+        {
+            if (selfHosted)
+            {
+                return new NullBookAction();
+            }
+
+            var bookStoreEntities = 
+                new BookStore.BookStoreEntities(new Uri("http://localhost:51423/BookStoreDataService.svc"));
+            return new AddAndDisplayBooksAction(bookStoreEntities);
         }
 
         /// <summary>
@@ -82,7 +101,10 @@ namespace TimeService.Client
         /// <returns>The newly created client.</returns>
         private static ITimeWebService CreateTimeWebService(bool selfHosted)
         {
-            var address = selfHosted ? "http://localhost:8887/TimeWebService" : "http://localhost:51423/TimeWebService/TimeWebService.svc";
+            var address = 
+                selfHosted 
+                ? "http://localhost:8887/TimeWebService" 
+                : "http://localhost:51423/TimeWebService/TimeWebService.svc";
             var channelFactory = new ChannelFactory<ITimeWebService>(new WebHttpBinding(), address);
             channelFactory.Endpoint.Behaviors.Add(new WebHttpBehavior());
             return channelFactory.CreateChannel();
@@ -93,13 +115,15 @@ namespace TimeService.Client
         /// </summary>
         /// <param name="service">The service.</param>
         /// <param name="webServiceClient">The web service client.</param>
-        private static void Query(ITimeService service, ITimeWebService webServiceClient)
+        /// <param name="bookAction">The book action.</param>
+        private static void Query(ITimeService service, ITimeWebService webServiceClient, IBookAction bookAction)
         {
             for (int i = 0; i < QUERIES; i++)
             {
                 Console.WriteLine("Server time (Service):    \t{0}", service.WhatTimeIsIt());
                 Console.WriteLine("Server time (Web Service):\t{0}", webServiceClient.WhatTimeIsIt());
                 Console.WriteLine("Server time + 1 Month:    \t{0}", webServiceClient.AddMonths(1));
+                bookAction.PerformAction();
                 Thread.Sleep(SLEEP);
             }
         }

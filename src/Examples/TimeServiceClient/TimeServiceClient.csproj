@@ -43,6 +43,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -63,8 +64,16 @@
     <Compile Include="..\WcfTimeService\TimeWebService\ITimeWebService.cs">
       <Link>ITimeWebService.cs</Link>
     </Compile>
+    <Compile Include="AddAndDisplayBooksAction.cs" />
+    <Compile Include="IBookAction.cs" />
+    <Compile Include="NullBookAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\BookStore\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.datasvcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\Services.Time\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,6 +87,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\BookStore\service.edmx" />
     <None Include="Service References\Services.Time\TimeService.wsdl" />
     <None Include="Service References\Services.Time\TimeService.xsd">
       <SubType>Designer</SubType>
@@ -101,6 +111,17 @@
   <ItemGroup>
     <None Include="Service References\Services.Time\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ServiceReferenceMetadataStorage Include="Service References\BookStore\">
+      <Type>datasvcmap</Type>
+    </ServiceReferenceMetadataStorage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BookStore\Reference.datasvcmap">
+      <Generator>DataServiceClientGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>

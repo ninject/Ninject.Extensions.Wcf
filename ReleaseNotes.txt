@@ -1,5 +1,6 @@
 Version 2.4.0.0
 ---------------
 - Added: Support for restful services
+- Added: Support for data services
 - Added: NinjectServiceHost<T> to support creation of self hosted services without having to define ServiceHost bindings
 - Added: Support for singleton services hosted on IIS

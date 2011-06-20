@@ -16,5 +16,11 @@
       <dependency id="Ninject" version="{NinjectVersion}" />
       <dependency id="Ninject.Web.Common" version="2.2.0.0" />
     </dependencies> 
-  </metadata>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Data.Services" />
+      <frameworkAssembly assemblyName="System.ServiceModel" />
+      <frameworkAssembly assemblyName="System.ServiceModel.Activation" />
+      <frameworkAssembly assemblyName="System.ServiceModel.Web" />
+    </frameworkAssemblies>
+	</metadata>
 </package>
