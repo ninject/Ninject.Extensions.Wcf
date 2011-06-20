@@ -52,7 +52,7 @@ namespace WindowsTimeService
         /// <param name="timeWebServiceHost">The time web service host.</param>
         public WindowsTimeService(NinjectServiceHost<TimeService> timeServiceHost, NinjectWebServiceHost<TimeWebService> timeWebServiceHost)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.timeServiceHost = timeServiceHost;
             this.timeWebServiceHost = timeWebServiceHost;

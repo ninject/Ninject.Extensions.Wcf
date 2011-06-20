@@ -1,0 +1,6 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>95906A18-0F51-4FFC-96AE-27F9A147BBAA/d:ServiceHost</SkipFolder>
+    <SkipFolder>95906A18-0F51-4FFC-96AE-27F9A147BBAA/d:WebServiceHost</SkipFolder>
+  </NamespaceFolders>
+</Configuration>

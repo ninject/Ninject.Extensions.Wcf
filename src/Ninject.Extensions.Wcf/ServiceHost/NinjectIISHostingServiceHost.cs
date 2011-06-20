@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="NinjectServiceHost{T}.cs" company="Ninject Project Contributors">
+// <copyright file="NinjectIISHostingServiceHost.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Author: Remo Gloor (remo.gloor@gmail.com)
 //
@@ -21,33 +21,24 @@
 
 namespace Ninject.Extensions.Wcf
 {
-    using System.ServiceModel;
+    using System;
     using System.ServiceModel.Description;
 
     /// <summary>
-    /// A service host that uses Ninject to create the service instances.
+    /// A ServiceHost for hosting on IIS.
     /// </summary>
     /// <typeparam name="T">The type of the service</typeparam>
-    public class NinjectServiceHost<T> : NinjectServiceHost
+    internal class NinjectIISHostingServiceHost<T> : NinjectAbstractServiceHost<T>
     {
         /// <summary>
-        /// Initializes a new instance of the NinjectServiceHost class.
+        /// Initializes a new instance of the NinjectIISHostingServiceHost class.
         /// </summary>
         /// <param name="serviceBehavior">The service behavior.</param>
         /// <param name="instance">The instance.</param>
-        public NinjectServiceHost(IServiceBehavior serviceBehavior, T instance)
-            : base(serviceBehavior)
+        /// <param name="baseAddresses">The base addresses.</param>
+        public NinjectIISHostingServiceHost(IServiceBehavior serviceBehavior, T instance, Uri[] baseAddresses)
+            : base(serviceBehavior, instance, baseAddresses)
         {
-            var addresses = new UriSchemeKeyedCollection();
-
-            if (ServiceTypeHelper.IsSingletonService(instance))
-            {
-                this.InitializeDescription(instance, addresses);
-            }
-            else
-            {
-                this.InitializeDescription(typeof(T), addresses);
-            }
         }
     }
 }

@@ -1,6 +1,7 @@
 //-------------------------------------------------------------------------------
-// <copyright file="InstanceContextModeDefinition.cs" company="Ninject Project Contributors">
+// <copyright file="NinjectServiceHost{T}.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Author: Remo Gloor (remo.gloor@gmail.com)
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 //   you may not use this file except in compliance with one of the Licenses.
@@ -18,27 +19,25 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace WcfTimeService
+namespace Ninject.Extensions.Wcf
 {
-    using System.ServiceModel;
+    using System;
+    using System.ServiceModel.Description;
 
     /// <summary>
-    /// Defines the InstanceContextMode
+    /// A service host that uses Ninject to create the service instances.
     /// </summary>
-    public static class InstanceContextModeDefinition
+    /// <typeparam name="T">The type of the service</typeparam>
+    public class NinjectServiceHost<T> : NinjectAbstractServiceHost<T>
     {
         /// <summary>
-        /// The InstanceContextMode used for the web services.
+        /// Initializes a new instance of the NinjectServiceHost class.
         /// </summary>
-        public const InstanceContextMode Mode =
-#if SINGLETON
-        InstanceContextMode.Single;
-#else
-#if SESSION
-        InstanceContextMode.PerSession;
-#else
-        InstanceContextMode.PerCall;
-#endif
-#endif
+        /// <param name="serviceBehavior">The service behavior.</param>
+        /// <param name="instance">The instance.</param>
+        public NinjectServiceHost(IServiceBehavior serviceBehavior, T instance)
+            : base(serviceBehavior, instance, new Uri[0])
+        {
+        }
     }
 }

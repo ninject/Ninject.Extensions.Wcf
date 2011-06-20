@@ -21,10 +21,23 @@
 
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+
     /// <summary>
     /// The host factory for NinjectWebServiceHosts
     /// </summary>
-    public class NinjectWebServiceHostFactory : NinjectServiceHostFactory<NinjectWebServiceHost>
+    public class NinjectWebServiceHostFactory : BaseNinjectServiceHostFactory
     {
+        /// <summary>
+        /// Gets the type of the service host.
+        /// </summary>
+        /// <value>The type of the service host.</value>
+        protected override Type ServiceHostType
+        {
+            get
+            {
+                return typeof(NinjectIISHostingWebServiceHost<>);
+            }
+        }
     }
 }

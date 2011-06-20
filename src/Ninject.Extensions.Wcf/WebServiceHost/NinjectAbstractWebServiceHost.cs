@@ -1,5 +1,5 @@
-//-------------------------------------------------------------------------------
-// <copyright file="NinjectWebServiceHost{T}.cs" company="Ninject Project Contributors">
+﻿//-------------------------------------------------------------------------------
+// <copyright file="NinjectAbstractWebServiceHost.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Author: Remo Gloor (remo.gloor@gmail.com)
 //
@@ -21,24 +21,27 @@
 
 namespace Ninject.Extensions.Wcf
 {
+    using System;
     using System.ServiceModel;
     using System.ServiceModel.Description;
 
     /// <summary>
-    /// A service host that uses Ninject to create the service instances.
+    /// Abstract base class for WebServiceHost that initializes based on the
+    /// ServiceBehavior attribute as singleton or multi instance web service
     /// </summary>
-    /// <typeparam name="T">The type of the service</typeparam>
-    public class NinjectWebServiceHost<T> : NinjectWebServiceHost
+    /// <typeparam name="T">The type of the web service</typeparam>
+    public abstract class NinjectAbstractWebServiceHost<T> : NinjectWebServiceHost
     {
         /// <summary>
-        /// Initializes a new instance of the NinjectWebServiceHost class.
+        /// Initializes a new instance of the NinjectAbstractWebServiceHost class.
         /// </summary>
         /// <param name="serviceBehavior">The service behavior.</param>
         /// <param name="instance">The instance.</param>
-        public NinjectWebServiceHost(IServiceBehavior serviceBehavior, T instance)
+        /// <param name="baseBaseAddresses">The base addresses.</param>
+        protected NinjectAbstractWebServiceHost(IServiceBehavior serviceBehavior, T instance, Uri[] baseBaseAddresses)
             : base(serviceBehavior)
         {
-            var addresses = new UriSchemeKeyedCollection();
+            var addresses = new UriSchemeKeyedCollection(baseBaseAddresses);
 
             if (ServiceTypeHelper.IsSingletonService(instance))
             {

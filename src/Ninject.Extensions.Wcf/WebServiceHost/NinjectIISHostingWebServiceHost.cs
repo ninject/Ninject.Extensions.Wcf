@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------
-// <copyright file="NinjectServiceHostFactory.cs" company="Ninject Project Contributors">
+// <copyright file="NinjectIISHostingWebServiceHost.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Author: Ian Davis (ian@innovatian.com)
+//   Author: Remo Gloor (remo.gloor@gmail.com)
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 //   you may not use this file except in compliance with one of the Licenses.
@@ -21,10 +21,24 @@
 
 namespace Ninject.Extensions.Wcf
 {
+    using System;
+    using System.ServiceModel.Description;
+
     /// <summary>
-    /// The host factory for NinjectServiceHosts
+    /// A WebServiceHost for hosting on IIS.
     /// </summary>
-    public class NinjectServiceHostFactory : NinjectServiceHostFactory<NinjectServiceHost>
+    /// <typeparam name="T">The type of the web service</typeparam>
+    internal class NinjectIISHostingWebServiceHost<T> : NinjectAbstractWebServiceHost<T>
     {
+        /// <summary>
+        /// Initializes a new instance of the NinjectIISHostingWebServiceHost class.
+        /// </summary>
+        /// <param name="serviceBehavior">The service behavior.</param>
+        /// <param name="instance">The instance.</param>
+        /// <param name="baseAddresses">The base addresses.</param>
+        public NinjectIISHostingWebServiceHost(IServiceBehavior serviceBehavior, T instance, Uri[] baseAddresses)
+            : base(serviceBehavior, instance, baseAddresses)
+        {
+        }
     }
 }

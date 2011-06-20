@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="NinjectServiceHostFactory{T}.cs" company="Ninject Project Contributors">
+// <copyright file="BaseNinjectServiceHostFactory.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Author: Ian Davis (ian@innovatian.com)
 //
@@ -29,16 +29,18 @@ namespace Ninject.Extensions.Wcf
     /// <summary>
     /// The host factory for the specified ServiceHost
     /// </summary>
-    /// <typeparam name="T">
-    /// The type of the service host
-    /// </typeparam>
-    public abstract class NinjectServiceHostFactory<T> : ServiceHostFactory
-        where T : ServiceHost
+    public abstract class BaseNinjectServiceHostFactory : ServiceHostFactory
     {
         /// <summary>
         /// The kernel that is used to create instances.
         /// </summary>
         private static IKernel kernelInstance;
+
+        /// <summary>
+        /// Gets the type of the service host.
+        /// </summary>
+        /// <value>The type of the service host.</value>
+        protected abstract Type ServiceHostType { get; }
 
         /// <summary>
         /// Sets the kernel on this instance.
@@ -66,9 +68,9 @@ namespace Ninject.Extensions.Wcf
         /// </returns>
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            var serviceTypeParameter = new ConstructorArgument("serviceType", serviceType);
-            var baseAddressesParameter = new ConstructorArgument("baseAddresses", baseAddresses);
-            return kernelInstance.Get<T>(serviceTypeParameter, baseAddressesParameter);
+            return (ServiceHost)kernelInstance.Get(
+                this.ServiceHostType.MakeGenericType(serviceType),
+                new ConstructorArgument("baseAddresses", baseAddresses));
         }
     }
 }

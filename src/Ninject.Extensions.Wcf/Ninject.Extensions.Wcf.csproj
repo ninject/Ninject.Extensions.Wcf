@@ -85,16 +85,20 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="NinjectServiceHostFactory{T}.cs" />
-    <Compile Include="NinjectWebServiceHost{T}.cs" />
+    <Compile Include="ServiceHost\NinjectAbstractServiceHost.cs" />
+    <Compile Include="BaseNinjectServiceHostFactory.cs" />
+    <Compile Include="WebServiceHost\NinjectAbstractWebServiceHost.cs" />
+    <Compile Include="ServiceHost\NinjectIISHostingServiceHost.cs" />
+    <Compile Include="WebServiceHost\NinjectIISHostingWebServiceHost.cs" />
+    <Compile Include="WebServiceHost\NinjectWebServiceHost{T}.cs" />
     <Compile Include="NinjectInstanceProvider.cs" />
-    <Compile Include="NinjectServiceHost{T}.cs" />
+    <Compile Include="ServiceHost\NinjectServiceHost{T}.cs" />
     <Compile Include="NinjectServiceBehavior.cs" />
-    <Compile Include="NinjectServiceHost.cs" />
-    <Compile Include="NinjectServiceHostFactory.cs" />
+    <Compile Include="ServiceHost\NinjectServiceHost.cs" />
+    <Compile Include="ServiceHost\NinjectServiceHostFactory.cs" />
     <Compile Include="NinjectWcfHttpApplicationPlugin.cs" />
-    <Compile Include="NinjectWebServiceHost.cs" />
-    <Compile Include="NinjectWebServiceHostFactory.cs" />
+    <Compile Include="WebServiceHost\NinjectWebServiceHost.cs" />
+    <Compile Include="WebServiceHost\NinjectWebServiceHostFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTypeHelper.cs" />
     <Compile Include="WcfModule.cs" />
@@ -117,6 +121,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

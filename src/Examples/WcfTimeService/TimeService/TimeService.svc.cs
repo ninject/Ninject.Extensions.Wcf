@@ -41,13 +41,6 @@ namespace WcfTimeService.TimeService
         /// <summary>
         /// Initializes a new instance of the <see cref="TimeService"/> class.
         /// </summary>
-        public TimeService()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TimeService"/> class.
-        /// </summary>
         /// <param name="systemClock">
         /// The system clock.
         /// </param>
