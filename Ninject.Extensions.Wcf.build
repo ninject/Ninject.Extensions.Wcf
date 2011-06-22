@@ -65,26 +65,8 @@
 
 	<target name="compile-tests" depends="core" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
 		<mkdir dir="${current.path.test}"/>
-		<copy todir="${current.path.test}" flatten="true">
-			<fileset basedir="${current.path.build}">
-				<include name="**/*.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test}">
-			<fileset basedir="${path.tools.xunit}">
-				<include name="xunit.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test}" if="${not(string::contains(build.platform, 'net-4.0'))}">
-			<fileset basedir="${path.tools.moq}/net35">
-				<include name="Moq.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test}" if="${string::contains(build.platform, 'net-4.0')}">
-			<fileset basedir="${path.tools.moq}/net40">
-				<include name="Moq.dll"/>
-			</fileset>
-		</copy>
+		<call target="CopyDefaultTestInfrastructureAssemblies"/>
+
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 		 output="${current.path.test}/${product.assembly.test}">
 			<sources basedir="${path.src}">
@@ -111,29 +93,7 @@
 	
 	<target name="compile-silverlight-tests" depends="core" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
 		<mkdir dir="${current.path.test}"/>
-		<copy todir="${current.path.test}" flatten="true">
-			<fileset basedir="${current.path.build}">
-				<include name="**/*.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test}" if="${string::contains(build.platform, 'silverlight-4.0')}">
-			<fileset basedir="${path.tools.moq}/silverlight4">
-				<include name="Moq.Silverlight.dll"/>
-				<include name="Castle.Core.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test}" unless="${string::contains(build.platform, 'silverlight-4.0')}">
-			<fileset basedir="${path.tools.moq}/silverlight3">
-				<include name="Moq.Silverlight.dll"/>
-				<include name="Castle.Core-Silverlight.dll"/>
-				<include name="Castle.DynamicProxy-Silverlight.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test}">
-			<fileset basedir="${path.tools.xunit.sl}${build.platform}">
-				<include name="*.dll"/>
-			</fileset>
-		</copy>
+		<call target="CopyDefaultTestInfrastructureAssemblies-SL"/>
 		
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 		 output="${current.path.test}/${product.assembly.silverlighttestdll}">
