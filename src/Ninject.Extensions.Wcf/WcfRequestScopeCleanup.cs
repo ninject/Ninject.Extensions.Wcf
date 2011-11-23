@@ -21,18 +21,16 @@
 
 namespace Ninject.Extensions.Wcf
 {
-    using System.Linq;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
 
     using Ninject.Activation.Caching;
-    using Ninject.Infrastructure.Language;
 
     /// <summary>
     /// Cleans up the ninject cache from the OperationContext.Current after each 
     /// </summary>
-    public class WcfRequestScopeCleanup : GlobalKernelRegistry, IDispatchMessageInspector
+    public class WcfRequestScopeCleanup : GlobalKernelRegistration, IDispatchMessageInspector
     {
         /// <summary>
         /// Defines if the scope is released at the end of the request.
@@ -72,7 +70,7 @@ namespace Ninject.Extensions.Wcf
             if (this.releaseScopeAtRequestEnd)
             {
                 var context = OperationContext.Current;
-                Kernels.Select(kernel => kernel.Components.Get<ICache>()).Map(cache => cache.Clear(context));
+                this.MapKernels(kernel => kernel.Components.Get<ICache>().Clear(context));
             }
         }
     }
