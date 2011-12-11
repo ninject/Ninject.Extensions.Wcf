@@ -74,8 +74,8 @@ namespace TimeService.Client
                 return new NullBookAction();
             }
 
-            var bookStoreEntities = 
-                new BookStore.BookStoreEntities(new Uri("http://localhost:51423/BookStoreDataService.svc"));
+            var bookStoreEntities =
+                new BookStore.BookStoreEntities(new Uri("http://localhost:51423/DataSevice/BookStoreDataService.svc"));
             return new AddAndDisplayBooksAction(bookStoreEntities);
         }
 

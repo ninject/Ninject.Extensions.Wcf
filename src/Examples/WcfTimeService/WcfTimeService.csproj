@@ -83,7 +83,9 @@
     <Content Include="Global.asax" />
     <Content Include="TimeService\TimeService.svc" />
     <Content Include="TimeWebService\TimeWebService.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSevice\BookStoreDataService.svc.cs">

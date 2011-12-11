@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Factory="Ninject.Extensions.Wcf.NinjectDataServiceHostFactory" Service="WcfTimeService.BookStoreDataService" %>
+﻿<%@ ServiceHost Language="C#" Factory="Ninject.Extensions.Wcf.NinjectDataServiceHostFactory" Service="WcfTimeService.DataSevice.BookStoreDataService" %>

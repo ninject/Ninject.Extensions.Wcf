@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0676690e-10fa-479e-a345-4eec0cdf6e1d" xmlns="urn:schemas-microsoft-com:xml-dataservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b5a9b82b-ce2b-46e9-bb59-d7db9032720d" xmlns="urn:schemas-microsoft-com:xml-dataservicemap">
   <MetadataSources>
-    <MetadataSource Address="http://localhost:51423/BookStoreDataService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:51423/DataSevice/BookStoreDataService.svc/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.edmx" MetadataType="Edmx" ID="cc5c48a3-68c5-452a-9fd0-c24713cd9777" SourceId="1" SourceUrl="http://localhost:51423/BookStoreDataService.svc" />
+    <MetadataFile FileName="service.edmx" MetadataType="Edmx" ID="8f0c4b09-6372-49c9-abbf-1253143dae02" SourceId="1" SourceUrl="http://localhost:51423/DataSevice/BookStoreDataService.svc/" />
   </Metadata>
   <Extensions />
   <Parameters>
