@@ -84,7 +84,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj">
+    <ProjectReference Include="..\..\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj">
       <Project>{95906A18-0F51-4FFC-96AE-27F9A147BBAA}</Project>
       <Name>Ninject.Extensions.Wcf</Name>
     </ProjectReference>
