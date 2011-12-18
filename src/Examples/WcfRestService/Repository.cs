@@ -20,6 +20,8 @@
 //-------------------------------------------------------------------------------
 
 
+using System;
+
 namespace WcfRestService
 {
 	using System.Collections.Generic;
