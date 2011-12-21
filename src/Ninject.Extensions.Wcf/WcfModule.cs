@@ -47,8 +47,7 @@ namespace Ninject.Extensions.Wcf
                 .WithConstructorArgument("releaseScopeAtRequestEnd", ctx => ctx.Kernel.Settings.Get("ReleaseScopeAtRequestEnd", true));
 
             this.Bind<Func<Type, IInstanceProvider>>()
-                .ToMethod<Func<Type, IInstanceProvider>>(
-                ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
+                .ToMethod(ctx => serviceType => ctx.Kernel.Get<NinjectInstanceProvider>(new ConstructorArgument("serviceType", serviceType)));
         }
     }
 }
