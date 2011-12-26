@@ -20,20 +20,18 @@
 //-------------------------------------------------------------------------------
 
 
-using System;
-
 namespace WcfRestService
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	/// <summary>
-	/// An implementation of IRepository
-	/// </summary>
-	public class Repository : IRepository
-	{
-		public List<SampleItem> GetCollection()
-		{
-			return new List<SampleItem>() { new SampleItem() { Id = 1, StringValue = "Hello" } };
-		}
-	}
+    /// <summary>
+    /// An implementation of IRepository
+    /// </summary>
+    public class Repository : IRepository
+    {
+        public List<SampleItem> GetCollection()
+        {
+            return new List<SampleItem>() { new SampleItem() { Id = 1, StringValue = "Hello" } };   
+        }
+    }
 }

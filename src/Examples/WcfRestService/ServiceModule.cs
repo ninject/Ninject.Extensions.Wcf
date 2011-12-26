@@ -21,19 +21,22 @@
 
 namespace WcfRestService
 {
-	using Ninject.Extensions.Wcf;
-	using Ninject.Web.Common;
-	
-	public class ServiceModule : WcfModule
-	{
-		public override void Load()
-		{
-			// Binding services InRequestScope allows a single instance to be shared for all requests to the Ninject kernel for
-			// instances of that type in a given WCF REST Request.  Other options include:
-			//	 InTransientScope() - If you dont' want instances to be shared for a given WCF REST Request
- 			//   InSingletonScope() - If you want instances shared between all WCF REST Requests.  You of course need to handle thread safety in this case
-			// You probably don't want to use InThreadScope() since IIS can re-use the same thread for multiple requests
-			this.Bind<IRepository>().To<Repository>().InRequestScope();
-		}
-	}
+    using Ninject.Extensions.Wcf;
+    using Ninject.Web.Common;
+    
+    public class ServiceModule : WcfModule
+    {
+        /// <summary>
+        /// Loads the module into the kernel.
+        /// </summary>
+        public override void Load()
+        {
+            // Binding services InRequestScope allows a single instance to be shared for all requests to the Ninject kernel for
+            // instances of that type in a given WCF REST Request.  Other options include:
+            //   InTransientScope() - If you dont' want instances to be shared for a given WCF REST Request
+            //   InSingletonScope() - If you want instances shared between all WCF REST Requests.  You of course need to handle thread safety in this case
+            // You probably don't want to use InThreadScope() since IIS can re-use the same thread for multiple requests
+            this.Bind<IRepository>().To<Repository>().InRequestScope();
+        }
+    }
 }

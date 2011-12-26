@@ -21,13 +21,13 @@
 
 namespace WcfRestService
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	/// <summary>
-	/// The interface for a sample repository 
-	/// </summary>
-	public interface IRepository
-	{
-		List<SampleItem> GetCollection();
-	}
+    /// <summary>
+    /// The interface for a sample repository 
+    /// </summary>
+    public interface IRepository
+    {
+        List<SampleItem> GetCollection();
+    }
 }
