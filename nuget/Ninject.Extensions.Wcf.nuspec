@@ -6,8 +6,7 @@
     <authors>Ninject Project Contributors</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
 	<licenseUrl>https://github.com/ninject/ninject.extensions.wcf/raw/master/LICENSE.txt</licenseUrl>
-    <description>Ninject WCF extensions</description>
-    <summary></summary>
+    <description>Ninject extension to add ioc for WCF services.</description>
     <language>en-US</language>
 	<tags>Ninject ioc di wcf</tags>
 	<iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>

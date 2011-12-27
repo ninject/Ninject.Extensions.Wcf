@@ -25,6 +25,7 @@ using System.Security;
 
 [assembly: AssemblyTitle("Ninject Wcf Integration Library")]
 [assembly: Guid("b7e542d4-a9c6-43e2-af7b-0852c726ce43")]
+[assembly: AssemblyDescriptionAttribute("Ninject extension to add ioc for WCF services.")]
 
 #if !NO_PARTIAL_TRUST
 [assembly: AllowPartiallyTrustedCallers]
