@@ -22,12 +22,12 @@
 namespace WcfServiceLibrary
 {
     using log4net;
-    using Ninject.Modules;
+    using Ninject.Extensions.Wcf;
 
     /// <summary>
     /// The ninject module that specifies the bindings for this example.
     /// </summary>
-    public class ServiceModule : NinjectModule
+    public class ServiceModule : WcfModule
     {
         /// <summary>
         /// Loads the module into the kernel.
