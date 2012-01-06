@@ -25,20 +25,20 @@ namespace Ninject.Extensions.Wcf
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
 
-    using Modules;
     using Ninject.Web.Common;
     using Parameters;
 
     /// <summary>
     /// A inject module that defines the bindings that are used to create the services for the wcf extension.
     /// </summary>
-    public class WcfModule : NinjectModule
+    public class WcfModule : GlobalKernelRegistrationModule<WcfRequestScopeCleanup>
     {
         /// <summary>
         /// Loads the module into the kernel.
         /// </summary>
         public override void Load()
         {
+            base.Load();
             Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfHttpApplicationPlugin>();
 
             this.Bind<NinjectInstanceProvider>().ToSelf();
