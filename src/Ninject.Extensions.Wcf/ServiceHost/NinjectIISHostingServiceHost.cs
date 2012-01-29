@@ -34,10 +34,10 @@ namespace Ninject.Extensions.Wcf
         /// Initializes a new instance of the NinjectIISHostingServiceHost class.
         /// </summary>
         /// <param name="serviceBehavior">The service behavior.</param>
-        /// <param name="instance">The instance.</param>
         /// <param name="baseAddresses">The base addresses.</param>
-        public NinjectIISHostingServiceHost(IServiceBehavior serviceBehavior, T instance, Uri[] baseAddresses)
-            : base(serviceBehavior, instance, baseAddresses)
+        /// <param name="kernel">The kernel.</param>
+        public NinjectIISHostingServiceHost(IServiceBehavior serviceBehavior, Uri[] baseAddresses, IKernel kernel)
+            : base(serviceBehavior, baseAddresses, kernel)
         {
         }
     }

@@ -33,19 +33,25 @@ namespace Ninject.Extensions.Wcf
     public abstract class NinjectAbstractServiceHost<T> : NinjectServiceHost
     {
         /// <summary>
+        /// The ninject kernel
+        /// </summary>
+        private readonly IKernel kernel;
+
+        /// <summary>
         /// Initializes a new instance of the NinjectAbstractServiceHost class.
         /// </summary>
         /// <param name="serviceBehavior">The service behavior.</param>
-        /// <param name="instance">The instance.</param>
         /// <param name="baseAddresses">The baseAddresses.</param>
-        protected NinjectAbstractServiceHost(IServiceBehavior serviceBehavior, T instance, Uri[] baseAddresses)
+        /// <param name="kernel">The kernel.</param>
+        protected NinjectAbstractServiceHost(IServiceBehavior serviceBehavior, Uri[] baseAddresses, IKernel kernel)
             : base(serviceBehavior)
         {
+            this.kernel = kernel;
             var addresses = new UriSchemeKeyedCollection(baseAddresses);
 
-            if (ServiceTypeHelper.IsSingletonService(instance))
+            if (ServiceTypeHelper.IsSingletonService<T>())
             {
-                this.InitializeDescription(instance, addresses);
+                this.InitializeDescription(this.kernel.Get<T>(), addresses);
             }
             else
             {
