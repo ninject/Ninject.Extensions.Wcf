@@ -27,6 +27,7 @@ namespace Ninject.Extensions.Wcf
     using System.Linq;
     using System.ServiceModel;
     using System.ServiceModel.Web;
+    using Ninject.Activation;
     using Ninject.Components;
     using Ninject.Web.Common;
 
@@ -52,13 +53,11 @@ namespace Ninject.Extensions.Wcf
         /// <summary>
         /// Gets the request scope.
         /// </summary>
-        /// <value>The request scope.</value>
-        public object RequestScope
+        /// <param name="context">The context.</param>
+        /// <returns>The request scope.</returns>
+        public object GetRequestScope(IContext context)
         {
-            get
-            {
-                return OperationContext.Current;
-            }
+            return OperationContext.Current;
         }
         
         /// <summary>
