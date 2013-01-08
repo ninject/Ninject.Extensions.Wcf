@@ -21,11 +21,16 @@
 
 namespace WindowsTimeService
 {
+    using System;
+    using System.Reflection;
     using System.ServiceModel;
-    using System.ServiceModel.Web;
+    using System.ServiceModel.Description;
     using System.ServiceProcess;
 
+    using Ninject;
     using Ninject.Extensions.Wcf;
+    using Ninject.Extensions.Wcf.SelfHost;
+    using Ninject.Web.Common.SelfHost;
 
     using WcfTimeService.TimeService;
     using WcfTimeService.TimeWebService;
@@ -35,27 +40,14 @@ namespace WindowsTimeService
     /// </summary>
     public partial class WindowsTimeService : ServiceBase
     {
-        /// <summary>
-        /// The time service host.
-        /// </summary>
-        private readonly ServiceHost timeServiceHost;
-
-        /// <summary>
-        /// The time web service.
-        /// </summary>
-        private readonly WebServiceHost timeWebServiceHost;
+        private NinjectSelfHostBootstrapper selfHost;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsTimeService"/> class.
         /// </summary>
-        /// <param name="timeServiceHost">The time service host.</param>
-        /// <param name="timeWebServiceHost">The time web service host.</param>
-        public WindowsTimeService(NinjectServiceHost<TimeService> timeServiceHost, NinjectWebServiceHost<TimeWebService> timeWebServiceHost)
+        public WindowsTimeService()
         {
             this.InitializeComponent();
-
-            this.timeServiceHost = timeServiceHost;
-            this.timeWebServiceHost = timeWebServiceHost;
         }
 
         /// <summary>
@@ -76,17 +68,39 @@ namespace WindowsTimeService
         /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
-            this.timeServiceHost.AddServiceEndpoint(
-                typeof(ITimeService),
-                new NetTcpBinding(), 
-                "net.tcp://localhost/TimeService");
-            this.timeServiceHost.Open();
+            var timeServiceComfiguration = NinjectWcfConfiguration.Create<TimeService, NinjectServiceSelfHostFactory>(
+                this.ConfigureTimeServiceHost, 
+                new [] { new Uri("http://localhost:8889/TimeService") });
+            var timeWebServiceComfiguration = NinjectWcfConfiguration.Create<TimeWebService, NinjectWebServiceSelfHostFactory>(this.ConfigureTimeWebServiceHost);
 
-            this.timeWebServiceHost.AddServiceEndpoint(
-                typeof(ITimeWebService),
-                new WebHttpBinding(),
-                "http://localhost:8887/TimeWebService");
-            this.timeWebServiceHost.Open();
+            this.selfHost = new NinjectSelfHostBootstrapper(
+                CreateKernel, 
+                timeServiceComfiguration,
+                timeWebServiceComfiguration);
+            this.selfHost.Start();
+        }
+
+        private void ConfigureTimeServiceHost(ServiceHost host)
+        {
+            host.AddServiceEndpoint(typeof(ITimeService), new NetTcpBinding(), "net.tcp://localhost/TimeService");
+            host.AddServiceEndpoint(typeof(ITimeService), new BasicHttpBinding(), "");
+            AddMetadataExchange(host);
+        }
+
+        private static void AddMetadataExchange(ServiceHost host)
+        {
+            host.AddServiceEndpoint(typeof(ITimeService), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
+
+            ServiceMetadataBehavior serviceMetadataBehavior = host.Description.Behaviors.Find<ServiceMetadataBehavior>()
+                                                              ?? new ServiceMetadataBehavior();
+            serviceMetadataBehavior.HttpGetEnabled = true;
+            serviceMetadataBehavior.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
+            host.Description.Behaviors.Add(serviceMetadataBehavior);
+        }
+
+        private void ConfigureTimeWebServiceHost(ServiceHost host)
+        {
+            host.AddServiceEndpoint(typeof(ITimeWebService), new WebHttpBinding(), "http://localhost:8887/TimeWebService");
         }
 
         /// <summary>
@@ -96,15 +110,18 @@ namespace WindowsTimeService
         /// </summary>
         protected override void OnStop()
         {
-            if (this.timeServiceHost != null)
-            {
-                this.timeServiceHost.Close();
-            }
+            this.selfHost.Dispose();
+        }
 
-            if (this.timeWebServiceHost != null)
-            {
-                this.timeWebServiceHost.Close();
-            }
+        /// <summary>
+        /// Creates the kernel.
+        /// </summary>
+        /// <returns>the newly created kernel.</returns>
+        private static StandardKernel CreateKernel()
+        {
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+            return kernel;
         }
     }
 }

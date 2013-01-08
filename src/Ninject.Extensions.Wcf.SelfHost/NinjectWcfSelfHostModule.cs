@@ -1,7 +1,7 @@
-//-------------------------------------------------------------------------------
-// <copyright file="ServiceModule.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Author: Ian Davis (ian@innovatian.com)
+﻿//-------------------------------------------------------------------------------
+// <copyright file="NinjectWcfSelfHostModule.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2009-2013 Ninject Project Contributors
+//   Author: Remo Gloor (remo.gloor@gmail.com)
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 //   you may not use this file except in compliance with one of the Licenses.
@@ -19,28 +19,22 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace WcfTimeService
+namespace Ninject.Extensions.Wcf.SelfHost
 {
-    using log4net;
-
     using Ninject.Modules;
-    using WcfTimeService.TimeService;
+    using Ninject.Web.Common.SelfHost;
 
     /// <summary>
-    /// The module declaring the bindings of the service.
+    /// Module for the Ninject.Extensions.Wcf.SelfHost extension.
     /// </summary>
-    public class ServiceModule : NinjectModule
+    public class NinjectWcfSelfHostModule : NinjectModule
     {
         /// <summary>
         /// Loads the module into the kernel.
         /// </summary>
         public override void Load()
         {
-            // this.Bind<TimeService>().To<TimeService>();
-            this.Bind<ITimeService>().To<TimeService.TimeService>();
-            this.Bind<ISystemClock>().To<SystemClock>();
-
-            this.Bind<ILog>().ToMethod(ctx => LogManager.GetLogger(ctx.Request.Target.Member.DeclaringType));
+            this.Kernel.Bind<INinjectSelfHost>().To<NinjectWcfSelfHost>().InSingletonScope();
         }
     }
 }

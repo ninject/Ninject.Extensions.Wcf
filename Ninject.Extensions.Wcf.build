@@ -10,8 +10,8 @@
 	<property name="dependencies" value="Ninject,Ninject.Web.Common" overwrite="false"/>
 
 	<include buildfile="Ninject.include" />
-	<target name="all" depends="core csl"/>
-	<target name="nuget-all" depends="nuget"/>
+	<target name="all" depends="core csl selfhost"/>
+	<target name="nuget-all" depends="nuget nuget-selfhost nuget-webhost"/>
 
 	<target name="core" depends="init">
 		<copy todir="${current.path.build}/lib" if="${build.platform == 'net-3.5'}">
@@ -59,6 +59,35 @@
 				<include name="System.Web.dll"/>
 				<include name="System.Core.dll"/>
 				<include name="${path.lib}/CommonServiceLocator/Microsoft.Practices.ServiceLocation.dll"/>
+			</references>
+		</csc>
+	</target>	
+	
+	<target name="selfhost" depends="init core">
+		<property name="current.path.build.extensions" value="${path.build}/${build.platform}/${build.config}/extensions"/>
+		<mkdir dir="${current.path.build.extensions}" if="${not(directory::exists(current.path.build.extensions))}"/>
+		
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		output="${current.path.build}/${product.name}.SelfHost.dll" doc="${current.path.build}/${product.name}.SelfHost.xml" keyfile="${path.src}/${product.keyfile}">
+			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
+			<sources basedir="${path.src}">
+				<include name="${build.asminfo}"/>
+				<include name="${product.name}.SelfHost/**/*.cs"/>
+			</sources>
+			<references basedir="${current.path.build}">
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.Web.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="System.Data.dll"/>
+				<include name="System.Data.Services.dll"/>
+				<include name="System.ServiceModel.dll"/>
+				<include name="System.ServiceModel.Activation.dll"/>
+				<include name="System.ServiceModel.Web.dll"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
+				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.SelfHost.dll"/>
+				<include name="${current.path.build}/${product.assembly}"/>
 			</references>
 		</csc>
 	</target>	
@@ -139,4 +168,36 @@
 			</fileset>
 		</zip>
 	</target>
+	
+	<target name="nuget-selfhost">
+		<property name="nuget.sourcedir" value="${path.base}/nuget-selfhost" />
+		<property name="nuget.basedir" value="${path.base}/build/nuget-selfhost" />
+		<property name="nuget.platforms" value="${product.platforms}" />
+		<property name="nuget.name" value="${product.name}.Selfhost" />
+		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\Selfhost" dynamic="true"/>
+		<property name="nuget.dependencies" value="${product.name}" />
+		<property name="nuget.additionalFiles" value="-" />
+		<property name="nuget.packageName" value="${nuget.name}${product.packagePostfix}" />	
+		<property name="nuget.symbol.basedir" value="${path.base}/build/nuget-selfhost_symbol" />
+		<property name="nuget.project" value="${path.src}/${product.name}.Selfhost/${product.name}.Selfhost.csproj" />
+		
+		<property name="nant.settings.currentframework" value="net-4.0"/>
+		<msbuild project="${nuget.project}" />
+		<call target="nuget-run"/>
+	</target>	
+	
+	<target name="nuget-webhost">
+		<property name="nuget.sourcedir" value="${path.base}/nuget-webhost" />
+		<property name="nuget.basedir" value="${path.base}/build/nuget-webhost" />
+		<property name="nuget.platforms" value="" />
+		<property name="nuget.name" value="${product.name}.WebHost" />
+		<property name="nuget.dependencies" value="${product.name}" />
+		<property name="nuget.additionalFiles" value="-" />
+		<property name="nuget.packageName" value="${nuget.name}${product.packagePostfix}" />	
+		<property name="nuget.symbol.basedir" value="" />
+		<property name="nuget.project" value="" />
+		
+		<property name="nant.settings.currentframework" value="net-4.0"/>
+		<call target="nuget-run"/>
+	</target>	
 </project>

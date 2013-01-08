@@ -66,6 +66,7 @@ namespace Ninject.Extensions.Wcf
         public void Start()
         {
             BaseNinjectServiceHostFactory.SetKernel(this.kernel);
+            BaseNinjectServiceSelfHostFactory.SetKernel(this.kernel);
 #if !MONO
             NinjectDataServiceHostFactory.SetKernel(this.kernel);
 #endif

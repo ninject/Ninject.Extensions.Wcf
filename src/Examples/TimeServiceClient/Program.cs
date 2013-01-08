@@ -48,7 +48,7 @@ namespace TimeService.Client
         /// <summary>
         /// If true the enpoint is set to the selfhosted service.
         /// </summary>
-        private const bool UseSelfHosted = false;
+        private const bool UseSelfHosted = true;
 
         /// <summary>
         /// Main method of the application

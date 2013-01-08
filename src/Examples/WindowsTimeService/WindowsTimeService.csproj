@@ -65,6 +65,9 @@
     <Reference Include="Ninject.Web.Common">
       <HintPath>..\..\..\lib\Ninject.Web.Common\net-4.0\Ninject.Web.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject.Web.Common.SelfHost">
+      <HintPath>..\..\..\lib\Ninject.Web.Common\net-4.0\Ninject.Web.Common.SelfHost.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,6 +75,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -119,6 +123,10 @@
     <Compile Include="WindowsTimeServiceModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Ninject.Extensions.Wcf.SelfHost\Ninject.Extensions.Wcf.SelfHost.csproj">
+      <Project>{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}</Project>
+      <Name>Ninject.Extensions.Wcf.SelfHost</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj">
       <Project>{95906A18-0F51-4FFC-96AE-27F9A147BBAA}</Project>
       <Name>Ninject.Extensions.Wcf</Name>

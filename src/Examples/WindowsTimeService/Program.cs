@@ -22,8 +22,8 @@
 namespace WindowsTimeService
 {
     using System;
+    using System.Reflection;
     using Ninject;
-    using WcfTimeService;
 
     /// <summary>
     /// The application main.
@@ -35,8 +35,6 @@ namespace WindowsTimeService
         /// </summary>
         private static void Main()
         {
-            var kernel = new StandardKernel(new ServiceModule(), new WindowsTimeServiceModule());           
-
 #if SERVICE
             var ServicesToRun = new System.ServiceProcess.ServiceBase[]
                                 {
@@ -44,15 +42,12 @@ namespace WindowsTimeService
                                 };
             System.ServiceProcess.ServiceBase.Run( ServicesToRun );
 #else
-            var service = kernel.Get<WindowsTimeService>();
+            var service = new WindowsTimeService();
             try
             {
                 service.Start(new string[] { });
-
-                do
-                {
-                } 
-                while (Console.ReadLine() != "q");
+                Console.WriteLine("Press Enter to quit.");
+                Console.ReadLine();
             }
             finally
             {

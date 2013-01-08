@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Ninject.Extensions.Wcf.Selfhost</id>
+    <version>3.0.0.0</version>
+    <authors>Remo Gloor</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+	<licenseUrl>https://github.com/ninject/ninject.extensions.wcf/raw/master/LICENSE.txt</licenseUrl>
+    <description>Ninject extension to add ioc for WCF services when self hosting.</description>
+    <summary>Ninject extension to add ioc for WCF services when self hosting.</summary>
+    <language>en-US</language>
+	<tags>Ninject ioc di wcf</tags>
+    <iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
+    <projectUrl>http://www.ninject.org</projectUrl>
+    <dependencies>
+      <dependency id="Ninject.Web.Common.Selfhost" version="3.0.0.0" />
+      <dependency id="Ninject.Extensions.Wcf" version="3.0.0.0" />
+    </dependencies>
+  </metadata>
+</package>

@@ -87,8 +87,12 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BaseNinjectServiceSelfHostFactory.cs" />
     <Compile Include="DataServiceHost\NinjectDataServiceHost.cs" />
     <Compile Include="DataServiceHost\NinjectDataServiceHostFactory.cs" />
+    <Compile Include="INinjectSelfHostFactory.cs" />
+    <Compile Include="WebServiceHost\NinjectWebServiceSelfHostFactory.cs" />
+    <Compile Include="ServiceHost\NinjectServiceSelfHostFactory.cs" />
     <Compile Include="ServiceHost\NinjectAbstractServiceHost.cs" />
     <Compile Include="BaseNinjectServiceHostFactory.cs" />
     <Compile Include="WebServiceHost\NinjectAbstractWebServiceHost.cs" />

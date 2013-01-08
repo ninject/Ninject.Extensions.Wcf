@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceLibrary", "Exampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfRestService", "Examples\WcfRestService\WcfRestService.csproj", "{5E7C53B5-FC3A-49EE-9F5B-2B73A6AE5946}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Wcf.SelfHost", "Ninject.Extensions.Wcf.SelfHost\Ninject.Extensions.Wcf.SelfHost.csproj", "{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,16 @@ Global
 		{5E7C53B5-FC3A-49EE-9F5B-2B73A6AE5946}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5E7C53B5-FC3A-49EE-9F5B-2B73A6AE5946}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5E7C53B5-FC3A-49EE-9F5B-2B73A6AE5946}.Release|x86.ActiveCfg = Release|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
