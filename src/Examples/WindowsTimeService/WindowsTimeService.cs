@@ -68,39 +68,14 @@ namespace WindowsTimeService
         /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
-            var timeServiceComfiguration = NinjectWcfConfiguration.Create<TimeService, NinjectServiceSelfHostFactory>(
-                this.ConfigureTimeServiceHost, 
-                new [] { new Uri("http://localhost:8889/TimeService") });
-            var timeWebServiceComfiguration = NinjectWcfConfiguration.Create<TimeWebService, NinjectWebServiceSelfHostFactory>(this.ConfigureTimeWebServiceHost);
+            var timeServiceComfiguration = NinjectWcfConfiguration.Create<TimeService, NinjectServiceSelfHostFactory>();
+            var timeWebServiceComfiguration = NinjectWcfConfiguration.Create<TimeWebService, NinjectWebServiceSelfHostFactory>();
 
             this.selfHost = new NinjectSelfHostBootstrapper(
                 CreateKernel, 
                 timeServiceComfiguration,
                 timeWebServiceComfiguration);
             this.selfHost.Start();
-        }
-
-        private void ConfigureTimeServiceHost(ServiceHost host)
-        {
-            host.AddServiceEndpoint(typeof(ITimeService), new NetTcpBinding(), "net.tcp://localhost/TimeService");
-            host.AddServiceEndpoint(typeof(ITimeService), new BasicHttpBinding(), "");
-            AddMetadataExchange(host);
-        }
-
-        private static void AddMetadataExchange(ServiceHost host)
-        {
-            host.AddServiceEndpoint(typeof(ITimeService), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
-
-            ServiceMetadataBehavior serviceMetadataBehavior = host.Description.Behaviors.Find<ServiceMetadataBehavior>()
-                                                              ?? new ServiceMetadataBehavior();
-            serviceMetadataBehavior.HttpGetEnabled = true;
-            serviceMetadataBehavior.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
-            host.Description.Behaviors.Add(serviceMetadataBehavior);
-        }
-
-        private void ConfigureTimeWebServiceHost(ServiceHost host)
-        {
-            host.AddServiceEndpoint(typeof(ITimeWebService), new WebHttpBinding(), "http://localhost:8887/TimeWebService");
         }
 
         /// <summary>

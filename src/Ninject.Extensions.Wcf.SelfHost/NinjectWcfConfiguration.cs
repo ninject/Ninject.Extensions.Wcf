@@ -56,6 +56,19 @@ namespace Ninject.Extensions.Wcf.SelfHost
         /// </summary>
         public Uri[] BaseAddresses { get; private set; }
 
+
+        /// <summary>
+        /// Creates a self host wcf configuration instance.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <typeparam name="TServiceHostFactory">The type of the service host factory.</typeparam>
+        /// <returns>The newly created NinjectWcfConfiguration instance.</returns>
+        public static NinjectWcfConfiguration Create<TService, TServiceHostFactory>()
+            where TServiceHostFactory : INinjectSelfHostFactory
+        {
+            return Create<TService, TServiceHostFactory>(host => { }, new Uri[0]);
+        }
+        
         /// <summary>
         /// Creates a self host wcf configuration instance.
         /// </summary>
