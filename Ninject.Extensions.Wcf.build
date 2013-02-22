@@ -174,7 +174,7 @@
 		<property name="nuget.basedir" value="${path.base}/build/nuget-selfhost" />
 		<property name="nuget.platforms" value="${product.platforms}" />
 		<property name="nuget.name" value="${product.name}.Selfhost" />
-		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\Selfhost" dynamic="true"/>
+		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release" dynamic="true"/>
 		<property name="nuget.dependencies" value="${product.name}" />
 		<property name="nuget.additionalFiles" value="-" />
 		<property name="nuget.packageName" value="${nuget.name}${product.packagePostfix}" />	
