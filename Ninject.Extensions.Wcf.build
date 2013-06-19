@@ -58,7 +58,7 @@
 				<include name="System.ServiceModel.Activation.dll"/>
 				<include name="System.Web.dll"/>
 				<include name="System.Core.dll"/>
-				<include name="${path.lib}/CommonServiceLocator/Microsoft.Practices.ServiceLocation.dll"/>
+				<include name="${path.packages}/CommonServiceLocator.*/lib/NET35/Microsoft.Practices.ServiceLocation.dll"/>
 			</references>
 		</csc>
 	</target>	
