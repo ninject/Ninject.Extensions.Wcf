@@ -22,9 +22,7 @@
 namespace WcfTimeService
 {
     using log4net;
-
     using Ninject.Modules;
-    using WcfTimeService.TimeService;
 
     /// <summary>
     /// The module declaring the bindings of the service.
@@ -36,10 +34,7 @@ namespace WcfTimeService
         /// </summary>
         public override void Load()
         {
-            // this.Bind<TimeService>().To<TimeService>();
-            this.Bind<ITimeService>().To<TimeService.TimeService>();
             this.Bind<ISystemClock>().To<SystemClock>();
-
             this.Bind<ILog>().ToMethod(ctx => LogManager.GetLogger(ctx.Request.Target.Member.DeclaringType));
         }
     }

@@ -30,7 +30,7 @@ namespace WcfTimeService.TimeWebService
     /// </summary>
     [ServiceBehavior(InstanceContextMode = InstanceContextModeDefinition.Mode)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class TimeWebService : ITimeWebService
+    public class TimeWebService : ITimeWebService, IDisposable
     {
         /// <summary>
         /// The system clock to get the current time.
@@ -65,6 +65,10 @@ namespace WcfTimeService.TimeWebService
         public DateTime AddMonths(int months)
         {
             return this.systemClock.Now.AddMonths(months);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

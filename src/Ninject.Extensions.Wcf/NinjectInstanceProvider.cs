@@ -97,6 +97,14 @@ namespace Ninject.Extensions.Wcf
         /// </param>
         public void ReleaseInstance(InstanceContext instanceContext, object instance)
         {
+            if (!this.kernel.Release(instance))
+            {
+                IDisposable disposable = instance as IDisposable;
+                if (disposable != null)
+                {
+                    disposable.Dispose();
+                }
+            }
         }
     }
 }

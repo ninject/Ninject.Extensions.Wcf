@@ -1,3 +1,7 @@
+Version 3.0.2.0
+---------------
+- Added: Transient scoped services are disposed when not used anymore.
+
 Version 3.0.0.0
 ---------------
 - Added: Support for restful services
