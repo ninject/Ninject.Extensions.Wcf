@@ -26,6 +26,7 @@ namespace Ninject.Extensions.Wcf
     /// <summary>
     /// The host factory for NinjectWebServiceHosts
     /// </summary>
+    [Obsolete("Use NinjectServiceHostFactory and configure the Endpoint as REST service.")]
     public class NinjectWebServiceHostFactory : BaseNinjectServiceHostFactory
     {
         /// <summary>
