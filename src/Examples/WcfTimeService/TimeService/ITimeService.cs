@@ -23,6 +23,7 @@ namespace WcfTimeService.TimeService
 {
     using System;
     using System.ServiceModel;
+    using System.ServiceModel.Web;
 
     /// <summary>
     /// A service that provides the current time
@@ -35,6 +36,7 @@ namespace WcfTimeService.TimeService
         /// </summary>
         /// <returns>The current time.</returns>
         [OperationContract]
+        [WebGet]
         DateTime WhatTimeIsIt();
     }
 }
