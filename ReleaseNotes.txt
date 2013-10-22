@@ -3,6 +3,7 @@ Version 3.0.2.0
 - Added: Transient scoped services are disposed when not used anymore.
 - Added: Endpoints can now be configured in the app config. Rest service and mex bindings can now be used together with NinjectServiceHostFactory. Marked NinjectWebServiceHostFactory obsolete
 - Added: Better support for selfhosting
+- Added: #21: Close or abort wcf client depending on its state before dispose
 - Changed: Transient Services are disposed when not used anymore
 
 Version 3.0.0.0

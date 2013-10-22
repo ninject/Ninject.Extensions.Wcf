@@ -91,6 +91,7 @@
     <Compile Include="DataServiceHost\NinjectDataServiceHost.cs" />
     <Compile Include="DataServiceHost\NinjectDataServiceHostFactory.cs" />
     <Compile Include="INinjectSelfHostFactory.cs" />
+    <Compile Include="WcfDisposableStrategy.cs" />
     <Compile Include="WebServiceHost\NinjectWebServiceSelfHostFactory.cs" />
     <Compile Include="ServiceHost\NinjectServiceSelfHostFactory.cs" />
     <Compile Include="ServiceHost\NinjectAbstractServiceHost.cs" />

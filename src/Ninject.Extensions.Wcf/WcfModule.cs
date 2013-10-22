@@ -25,6 +25,7 @@ namespace Ninject.Extensions.Wcf
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
 
+    using Ninject.Activation.Strategies;
     using Ninject.Web.Common;
     using Parameters;
 
@@ -39,6 +40,8 @@ namespace Ninject.Extensions.Wcf
         public override void Load()
         {
             base.Load();
+            Kernel.Components.Remove<IActivationStrategy, DisposableStrategy>();
+            Kernel.Components.Add<IActivationStrategy, WcfDisposableStrategy>();
             Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfHttpApplicationPlugin>();
 
             this.Bind<NinjectInstanceProvider>().ToSelf();
