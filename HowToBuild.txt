@@ -1,9 +1,9 @@
 1. Get the Ninject version for which you want to build this extension. Compiled versions can be found on Build Server: 
-   http://teamcity.codebetter.com/viewType.html?tab=buildTypeStatusDiv&buildTypeId=bt243
+   https://teamcity.bbv.ch/viewLog.html?buildTypeId=bt7&buildId=lastSuccessful&tab=artifacts
 2. Copy all the zipped ninject files to lib/Ninject
-3. Get Ninject.Extensions.ContextPreservation e.g. from the build server
-   http://teamcity.codebetter.com/viewType.html?buildTypeId=bt360&tab=buildTypeStatusDiv
-   and copy all the zip files to /lib/Ninject.Extensions.ContextPreservation
+3. Get Ninject.Web.Common e.g. from the build server
+   https://teamcity.bbv.ch/viewLog.html?buildTypeId=bt29&buildId=lastSuccessful&tab=artifacts
+   and copy all the zip files to /lib/Ninject.Web.Common
 4. Run UnzipDependencies.cmd
 5. Run build-release.cmd
 
