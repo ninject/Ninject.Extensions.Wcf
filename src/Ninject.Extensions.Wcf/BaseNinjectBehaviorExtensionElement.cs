@@ -61,7 +61,7 @@ namespace Ninject.Extensions.Wcf
             /// <summary>
             /// Create the behavior
             /// </summary>
-            /// <returns></returns>
+            /// <returns>The behavior instance.</returns>
             protected override object CreateBehavior()
             {
                 return kernelInstance.Get<T>();
