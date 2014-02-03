@@ -37,24 +37,7 @@ namespace Ninject.Extensions.Wcf
         /// <param name="reference">A reference to the instance being deactivated.</param>
         public override void Deactivate(IContext context, InstanceReference reference)
         {
-            reference.IfInstanceIs<ICommunicationObject>(x =>
-                {
-                    if (x.State == CommunicationState.Faulted)
-                    {
-                        x.Abort();
-                    }
-                    else
-                    {
-                        try
-                        {
-                            x.Close();
-                        }
-                        catch
-                        {
-                            x.Abort();
-                        }
-                    }
-                });
+            reference.IfInstanceIs<ICommunicationObject>(x => x.SafeClose());
 
             base.Deactivate(context, reference);
         }
