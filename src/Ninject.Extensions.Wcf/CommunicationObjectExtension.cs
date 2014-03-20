@@ -28,10 +28,10 @@ namespace Ninject.Extensions.Wcf
     public static class CommunicationObjectExtension
     {
         /// <summary>
-        /// Close ICommunicationObject safely
+        /// Close or abort the ICommunicationObject depends on its state
         /// </summary>
         /// <param name="communicationObject">The communication object.</param>
-        public static void SafeClose(this ICommunicationObject communicationObject)
+        public static void CloseOrAbort(this ICommunicationObject communicationObject)
         {
             if (communicationObject.State == CommunicationState.Faulted)
             {
