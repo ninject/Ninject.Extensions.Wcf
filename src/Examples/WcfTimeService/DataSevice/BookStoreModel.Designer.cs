@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace WcfTimeService.DataSevice
 {
     #region Contexts
@@ -82,6 +82,7 @@ namespace WcfTimeService.DataSevice
         private ObjectSet<Book> _Books;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -93,11 +94,11 @@ namespace WcfTimeService.DataSevice
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -124,6 +125,7 @@ namespace WcfTimeService.DataSevice
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -202,9 +204,11 @@ namespace WcfTimeService.DataSevice
         partial void OnDescriptionChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }
