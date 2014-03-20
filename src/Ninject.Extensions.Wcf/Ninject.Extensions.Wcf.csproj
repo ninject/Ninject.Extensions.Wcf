@@ -68,6 +68,7 @@
       <HintPath>..\..\lib\Ninject.Web.Common\net-4.0\Ninject.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -87,7 +88,9 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BaseNinjectBehaviorExtensionElement.cs" />
     <Compile Include="BaseNinjectServiceSelfHostFactory.cs" />
+    <Compile Include="CommunicationObjectExtension.cs" />
     <Compile Include="DataServiceHost\NinjectDataServiceHost.cs" />
     <Compile Include="DataServiceHost\NinjectDataServiceHostFactory.cs" />
     <Compile Include="INinjectSelfHostFactory.cs" />

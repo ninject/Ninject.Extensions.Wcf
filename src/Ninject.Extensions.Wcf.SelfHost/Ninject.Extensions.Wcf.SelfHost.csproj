@@ -41,6 +41,7 @@
       <HintPath>..\..\lib\Ninject.Web.Common\net-4.0\Ninject.Web.Common.SelfHost.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.ServiceModel" />

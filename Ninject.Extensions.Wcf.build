@@ -35,6 +35,7 @@
 				<include name="System.Web.dll"/>
 				<include name="System.Core.dll"/>
 				<include name="System.Data.Services.dll"/>
+				<include name="System.Configuration.dll"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
 			</references>
@@ -84,6 +85,7 @@
 				<include name="System.ServiceModel.dll"/>
 				<include name="System.ServiceModel.Activation.dll"/>
 				<include name="System.ServiceModel.Web.dll"/>
+				<include name="System.Configuration.dll"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.dll"/>
 				<include name="${path.lib}/Ninject.Web.Common/${build.platform}/Ninject.Web.Common.SelfHost.dll"/>
