@@ -37,9 +37,8 @@ namespace Ninject.Extensions.Wcf
         /// <summary>
         /// Loads the module into the kernel.
         /// </summary>
-        public override void Load()
+        public override void InternalLoad()
         {
-            base.Load();
             Kernel.Components.Remove<IActivationStrategy, DisposableStrategy>();
             Kernel.Components.Add<IActivationStrategy, WcfDisposableStrategy>();
             Kernel.Components.Add<INinjectHttpApplicationPlugin, NinjectWcfHttpApplicationPlugin>();
