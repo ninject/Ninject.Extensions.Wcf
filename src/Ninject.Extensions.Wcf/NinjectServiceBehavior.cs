@@ -113,7 +113,8 @@ namespace Ninject.Extensions.Wcf
         {
             var endpointDispatchers =
                 serviceHostBase.ChannelDispatchers.OfType<ChannelDispatcher>()
-                    .SelectMany(channelDispatcher => channelDispatcher.Endpoints);
+                    .SelectMany(channelDispatcher => channelDispatcher.Endpoints)
+                    .Where(endpointDispatcher => !endpointDispatcher.IsSystemEndpoint);
             foreach (EndpointDispatcher endpointDispatcher in endpointDispatchers)
             {
                 endpointDispatcher.DispatchRuntime.InstanceProvider =
