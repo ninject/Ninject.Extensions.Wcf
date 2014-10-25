@@ -114,7 +114,14 @@ namespace Ninject.Extensions.Wcf
             var endpointDispatchers =
                 serviceHostBase.ChannelDispatchers.OfType<ChannelDispatcher>()
                     .SelectMany(channelDispatcher => channelDispatcher.Endpoints)
+
+#if !NET_35
                     .Where(endpointDispatcher => !endpointDispatcher.IsSystemEndpoint);
+#else
+                    .Where(endpointDispatcher => endpointDispatcher.ContractName != "IMetadataExchange" &&
+                                                 endpointDispatcher.ContractNamespace != "http://schemas.microsoft.com/2006/04/mex");
+#endif
+
             foreach (EndpointDispatcher endpointDispatcher in endpointDispatchers)
             {
                 endpointDispatcher.DispatchRuntime.InstanceProvider =
