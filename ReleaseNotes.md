@@ -1,6 +1,10 @@
-Version 3.2.1
+Version 3.2.2
 ---------------
 - Fixed: WS-Discovery does not work.
+
+Version 3.2.1
+---------------
+- Changed: Set ```NinjectBehaviorExtensionElement```'s kernel when start
 
 Version 3.2.0
 ---------------
