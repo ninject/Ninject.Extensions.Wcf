@@ -5,11 +5,12 @@
     <version>3.0.0.0</version>
     <authors>Remo Gloor</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-	<licenseUrl>https://github.com/ninject/ninject.extensions.wcf/raw/master/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/ninject/ninject.extensions.wcf/raw/master/LICENSE.txt</licenseUrl>
     <description>Ninject extension to add ioc for WCF services when IIS hosting.</description>
     <summary>Extension for Ninject providing integration with ASP.NET MVC WebAPI WebHost</summary>
+    <releaseNotes>https://github.com/ninject/Ninject.Extensions.Wcf/blob/master/ReleaseNotes.md</releaseNotes>
     <language>en-US</language>
-	<tags>Ninject ioc di wcf</tags>
+    <tags>Ninject ioc di wcf</tags>
     <iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
     <projectUrl>http://www.ninject.org</projectUrl>
     <dependencies>
