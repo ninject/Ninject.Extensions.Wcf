@@ -19,7 +19,8 @@
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Data.Services" />
       <frameworkAssembly assemblyName="System.ServiceModel" />
-      <frameworkAssembly assemblyName="System.ServiceModel.Activation" />
+      <frameworkAssembly assemblyName="System.ServiceModel.Activation" targetFramework="net40" />
+	  <frameworkAssembly assemblyName="System.ServiceModel.Activation" targetFramework="net45" />
       <frameworkAssembly assemblyName="System.ServiceModel.Web" />
     </frameworkAssemblies>
   </metadata>
