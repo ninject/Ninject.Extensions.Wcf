@@ -72,7 +72,7 @@ namespace Ninject.Extensions.Wcf.SelfHost
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposable"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected void Dispose(bool disposable)
+        protected virtual void Dispose(bool disposable)
         {
             foreach (var serviceHost in this.hosts)
             {
