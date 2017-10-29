@@ -26,7 +26,7 @@ namespace WcfRestService
     using System.Web.Routing;
     using Ninject;
     using Ninject.Extensions.Wcf;
-    using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
 
     // We replace HttpApplication with NinjectHttpApplication so Ninject can handle the activation and deactivation of
     // services using the Ninjection kernel for reach request for us.  

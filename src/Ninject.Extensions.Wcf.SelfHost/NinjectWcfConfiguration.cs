@@ -1,10 +1,9 @@
-﻿//-------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------
 // <copyright file="NinjectWcfConfiguration.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2013 Ninject Project Contributors
-//   Authors: Remo Gloor (remo.gloor@gmail.com)
-//           
+//   Copyright (c) 2009-2017 Ninject Project Contributors. All rights reserved.
+//
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
-//   you may not use this file except in compliance with one of the Licenses.
+//   You may not use this file except in compliance with one of the Licenses.
 //   You may obtain a copy of the License at
 //
 //       http://www.apache.org/licenses/LICENSE-2.0
@@ -17,7 +16,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 // </copyright>
-//-------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace Ninject.Extensions.Wcf.SelfHost
 {
@@ -56,7 +55,6 @@ namespace Ninject.Extensions.Wcf.SelfHost
         /// </summary>
         public Uri[] BaseAddresses { get; private set; }
 
-
         /// <summary>
         /// Creates a self host wcf configuration instance.
         /// </summary>
@@ -68,7 +66,7 @@ namespace Ninject.Extensions.Wcf.SelfHost
         {
             return Create<TService, TServiceHostFactory>(host => { }, new Uri[0]);
         }
-        
+
         /// <summary>
         /// Creates a self host wcf configuration instance.
         /// </summary>

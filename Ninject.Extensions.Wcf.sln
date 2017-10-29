@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{36C26E5A-FEB1-4463-8BB7-58A0AD55B8AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Wcf", "src\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj", "{95906A18-0F51-4FFC-96AE-27F9A147BBAA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Wcf.CommonServiceLocator", "src\Ninject.Extensions.Wcf.CommonServiceLocator\Ninject.Extensions.Wcf.CommonServiceLocator.csproj", "{6098B0FF-C092-449D-9572-538B215091B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ninject.Extensions.Wcf", "src\Ninject.Extensions.Wcf\Ninject.Extensions.Wcf.csproj", "{95906A18-0F51-4FFC-96AE-27F9A147BBAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsTimeService", "src\Examples\WindowsTimeService\WindowsTimeService.csproj", "{4EA178FB-9ED8-4848-BED9-7D7158DDD62F}"
 EndProject
@@ -22,12 +20,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceLibrary", "src\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfRestService", "src\Examples\WcfRestService\WcfRestService.csproj", "{5E7C53B5-FC3A-49EE-9F5B-2B73A6AE5946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Wcf.SelfHost", "src\Ninject.Extensions.Wcf.SelfHost\Ninject.Extensions.Wcf.SelfHost.csproj", "{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ninject.Extensions.Wcf.SelfHost", "src\Ninject.Extensions.Wcf.SelfHost\Ninject.Extensions.Wcf.SelfHost.csproj", "{9FB26E4B-E5C0-4EAA-AAAE-44247B3ECE1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9810EAD-300A-43DD-BA91-66C09FA2A0B1}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		CHANGELOG.md = CHANGELOG.md
 		README.md = README.md
-		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
 Global
@@ -40,10 +39,6 @@ Global
 		{95906A18-0F51-4FFC-96AE-27F9A147BBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95906A18-0F51-4FFC-96AE-27F9A147BBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95906A18-0F51-4FFC-96AE-27F9A147BBAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6098B0FF-C092-449D-9572-538B215091B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6098B0FF-C092-449D-9572-538B215091B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6098B0FF-C092-449D-9572-538B215091B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6098B0FF-C092-449D-9572-538B215091B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EA178FB-9ED8-4848-BED9-7D7158DDD62F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EA178FB-9ED8-4848-BED9-7D7158DDD62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EA178FB-9ED8-4848-BED9-7D7158DDD62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -78,5 +73,8 @@ Global
 		{857A2F92-C76E-4E57-9B9F-2E627C5ED5CE} = {36C26E5A-FEB1-4463-8BB7-58A0AD55B8AD}
 		{D47BED43-C87D-4C7B-B31C-22A54B8950B3} = {36C26E5A-FEB1-4463-8BB7-58A0AD55B8AD}
 		{5E7C53B5-FC3A-49EE-9F5B-2B73A6AE5946} = {36C26E5A-FEB1-4463-8BB7-58A0AD55B8AD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A37486C-34C8-41E6-8DAF-DDC8EDA50D80}
 	EndGlobalSection
 EndGlobal

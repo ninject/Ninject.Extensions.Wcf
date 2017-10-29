@@ -22,7 +22,7 @@
 namespace WcfTimeService
 {
     using Ninject;
-    using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
 
     /// <summary>
     /// The wcf application.

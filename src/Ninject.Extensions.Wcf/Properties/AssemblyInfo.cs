@@ -1,10 +1,9 @@
-﻿//-------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Author: Ian Davis (ian@innovatian.com)
+//   Copyright (c) 2009-2017 Ninject Project Contributors. All rights reserved.
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
-//   you may not use this file except in compliance with one of the Licenses.
+//   You may not use this file except in compliance with one of the Licenses.
 //   You may obtain a copy of the License at
 //
 //       http://www.apache.org/licenses/LICENSE-2.0
@@ -17,16 +16,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 // </copyright>
-//-------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security;
+using System;
 
-[assembly: AssemblyTitle("Ninject Wcf Integration Library")]
-[assembly: Guid("b7e542d4-a9c6-43e2-af7b-0852c726ce43")]
-[assembly: AssemblyDescriptionAttribute("Ninject extension to add ioc for WCF services.")]
-
-#if !NO_PARTIAL_TRUST
-[assembly: AllowPartiallyTrustedCallers]
-#endif
+[assembly: CLSCompliant(true)]
