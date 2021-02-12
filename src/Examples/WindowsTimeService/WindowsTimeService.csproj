@@ -58,7 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
-      <HintPath>..\..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\..\..\packages\log4net.2.0.10\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
