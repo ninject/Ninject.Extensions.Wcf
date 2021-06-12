@@ -22,16 +22,30 @@
 
 namespace WcfRestService
 {
+    using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// An implementation of IRepository
     /// </summary>
     public class Repository : IRepository
     {
-        public List<SampleItem> GetCollection()
+        private bool isDisposed = false;
+
+        public void Dispose()
         {
-            return new List<SampleItem>() { new SampleItem() { Id = 1, StringValue = "Hello" } };   
+            this.isDisposed = true;
+        }
+
+        public IEnumerable<SampleItem> GetItems()
+        {
+            if (this.isDisposed)
+            {
+                throw new ObjectDisposedException(nameof(Repository));
+            }
+
+            return new List<SampleItem>() { new SampleItem() { Id = 1, StringValue = "Hello" } };
         }
     }
 }

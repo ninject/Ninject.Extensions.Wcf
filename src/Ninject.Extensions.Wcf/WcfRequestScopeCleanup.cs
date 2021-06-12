@@ -69,7 +69,7 @@ namespace Ninject.Extensions.Wcf
             if (this.releaseScopeAtRequestEnd)
             {
                 var context = OperationContext.Current;
-                this.MapKernels(kernel => kernel.Components.Get<ICache>().Clear(context));
+                context.OperationCompleted += (s, e) => this.MapKernels(kernel => kernel.Components.Get<ICache>().Clear(context));
             }
         }
     }
