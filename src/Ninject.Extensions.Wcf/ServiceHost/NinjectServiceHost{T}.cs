@@ -38,5 +38,14 @@ namespace Ninject.Extensions.Wcf
             : base(serviceBehavior, instance, new Uri[0])
         {
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NinjectServiceHost{T}"/> class.
+        /// </summary>
+        /// <param name="serviceBehavior">The service behavior.</param>
+        public NinjectServiceHost(IServiceBehavior serviceBehavior)
+            : base(serviceBehavior, new Uri[0])
+        {
+        }
     }
 }

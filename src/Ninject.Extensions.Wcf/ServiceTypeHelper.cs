@@ -20,6 +20,7 @@
 
 namespace Ninject.Extensions.Wcf
 {
+    using System;
     using System.Linq;
     using System.ServiceModel;
 
@@ -31,14 +32,14 @@ namespace Ninject.Extensions.Wcf
         /// <summary>
         /// Determines whether the given service is a singleton service.
         /// </summary>
-        /// <param name="service">The service.</param>
+        /// <param name="serviceType">The service type.</param>
         /// <returns>
         ///     <c>true</c> if the service is a singleton; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsSingletonService(object service)
+        public static bool IsSingletonService(Type serviceType)
         {
             var serviceBehaviorAttribute =
-                service.GetType().GetCustomAttributes(typeof(ServiceBehaviorAttribute), true)
+                serviceType.GetCustomAttributes(typeof(ServiceBehaviorAttribute), true)
                 .Cast<ServiceBehaviorAttribute>()
                 .SingleOrDefault();
             return serviceBehaviorAttribute != null && serviceBehaviorAttribute.InstanceContextMode == InstanceContextMode.Single;

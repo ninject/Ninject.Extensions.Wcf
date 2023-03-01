@@ -42,14 +42,20 @@ namespace Ninject.Extensions.Wcf
         {
             var addresses = new UriSchemeKeyedCollection(baseAddresses);
 
-            if (ServiceTypeHelper.IsSingletonService(instance))
-            {
-                this.InitializeDescription(instance, addresses);
-            }
-            else
-            {
-                this.InitializeDescription(typeof(T), addresses);
-            }
+            this.InitializeDescription(instance, addresses);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NinjectAbstractServiceHost{T}"/> class.
+        /// </summary>
+        /// <param name="serviceBehavior">The service behavior.</param>
+        /// <param name="baseAddresses">The baseAddresses.</param>
+        protected NinjectAbstractServiceHost(IServiceBehavior serviceBehavior, Uri[] baseAddresses)
+            : base(serviceBehavior)
+        {
+            var addresses = new UriSchemeKeyedCollection(baseAddresses);
+
+            this.InitializeDescription(typeof(T), addresses);
         }
     }
 }

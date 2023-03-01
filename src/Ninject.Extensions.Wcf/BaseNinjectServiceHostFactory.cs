@@ -68,9 +68,19 @@ namespace Ninject.Extensions.Wcf
         /// </returns>
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            return (ServiceHost)kernelInstance.Get(
-                this.ServiceHostType.MakeGenericType(serviceType),
-                new ConstructorArgument("baseAddresses", baseAddresses));
+            if (ServiceTypeHelper.IsSingletonService(serviceType))
+            {
+                return (ServiceHost)kernelInstance.Get(
+                    this.ServiceHostType.MakeGenericType(serviceType),
+                    new ConstructorArgument("instance", kernelInstance.Get(serviceType)),
+                    new ConstructorArgument("baseAddresses", baseAddresses));
+            }
+            else
+            {
+                return (ServiceHost)kernelInstance.Get(
+                    this.ServiceHostType.MakeGenericType(serviceType),
+                    new ConstructorArgument("baseAddresses", baseAddresses));
+            }
         }
     }
 }
